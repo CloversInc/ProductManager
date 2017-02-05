@@ -1,9 +1,21 @@
 namespace Restaurant.Data.Models
 {
-    public class Entry
+    using System.ComponentModel.DataAnnotations;
+
+    public abstract class Entry
     {
         public int Id { get; set; }
 
-        public int Name { get; set; }
+        [Required]
+        public string Name { get; set; }
+
+        protected Entry()
+        {
+        }
+
+        protected Entry(string name)
+        {
+            this.Name = name;
+        }
     }
 }

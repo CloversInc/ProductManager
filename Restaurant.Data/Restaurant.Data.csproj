@@ -51,10 +51,14 @@
   <ItemGroup>
     <Compile Include="Enums\AllergenType.cs" />
     <Compile Include="Context\IRestaurantDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Enums\MeasurementType.cs" />
     <Compile Include="Models\Nutrition.cs" />
+    <Compile Include="Enums\NutritionType.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Storage.cs" />
@@ -64,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Models\Restaurant.Data.Diagram.cd" />
+    <None Include="Models\ModelsHierarchy.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

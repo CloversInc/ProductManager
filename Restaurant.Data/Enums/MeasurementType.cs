@@ -9,7 +9,7 @@ namespace Restaurant.Data.Enums
         Kilogram,
         Teaspoon,
         TableSpoon,
-        Cup
+        Cup,
+        Jar
     }
-
 }

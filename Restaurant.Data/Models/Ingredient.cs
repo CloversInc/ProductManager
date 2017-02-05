@@ -1,16 +1,16 @@
 ﻿namespace Restaurant.Data.Models
 {
-    using System.Collections.Generic;
-    using Enums;
+    using Restourant.Data.Models;
 
-    public class Ingredient : Entry
+    public class Ingredient : Product
     {
-        public decimal Price { get; set; }
+        public int RecipeId { get; set; }
 
-        public float Amount { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
-        public MeasurementType MeasurementType { get; set; }
-
-        public virtual ICollection<AllergenType> Type { get; set; }
+        public Ingredient(string name) 
+            : base(name)
+        {
+        }
     }
 }
