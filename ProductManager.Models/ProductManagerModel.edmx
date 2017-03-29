@@ -25,6 +25,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Sets">
           <Key>
@@ -41,6 +42,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="Storages">
           <Key>
@@ -51,11 +53,12 @@
           <Property Name="Location" Type="nvarchar" MaxLength="40" />
           <Property Name="CreatedOn" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="UnitType">
+        <EntityType Name="UnitTypes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <Association Name="FK_Products_ProductTypes">
           <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
@@ -94,10 +97,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_UnitType">
-          <End Role="UnitType" Type="Self.UnitType" Multiplicity="1" />
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UnitType">
+            <Principal Role="UnitTypes">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Products">
@@ -123,7 +126,7 @@
           <EntitySet Name="Sets" EntityType="Self.Sets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SetTypes" EntityType="Self.SetTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Storages" EntityType="Self.Storages" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UnitType" EntityType="Self.UnitType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitTypes" EntityType="Self.UnitTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Products_ProductTypes" Association="Self.FK_Products_ProductTypes">
             <End Role="ProductTypes" EntitySet="ProductTypes" />
             <End Role="Products" EntitySet="Products" />
@@ -137,7 +140,7 @@
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_UnitType" Association="Self.FK_Products_UnitType">
-            <End Role="UnitType" EntitySet="UnitType" />
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
@@ -201,6 +204,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_ProductTypes" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="Set">
@@ -220,6 +224,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sets" Relationship="ProductManagerModel.FK_Sets_SetTypes" FromRole="SetType" ToRole="Set" />
         </EntityType>
         <EntityType Name="Storage">
@@ -237,6 +242,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_UnitType" FromRole="UnitType" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Products_ProductTypes">
@@ -324,6 +330,7 @@
           <EntitySetMapping Name="ProductTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.ProductType">
               <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -342,6 +349,7 @@
           <EntitySetMapping Name="SetTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.SetType">
               <MappingFragment StoreEntitySet="SetTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -358,7 +366,8 @@
           </EntitySetMapping>
           <EntitySetMapping Name="UnitTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.UnitType">
-              <MappingFragment StoreEntitySet="UnitType">
+              <MappingFragment StoreEntitySet="UnitTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

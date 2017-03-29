@@ -84,9 +84,6 @@
     <Compile Include="Storage.cs">
       <DependentUpon>ProductManagerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UnitType.cs">
       <DependentUpon>ProductManagerModel.tt</DependentUpon>
     </Compile>
