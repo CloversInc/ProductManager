@@ -1,8 +1,7 @@
 ﻿namespace ProductManager.ProductSevice.Interfaces
 {
     using System.Collections.Generic;
-    using Data;
-    using Models;
+    using Database;
 
     interface ISetService
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.Data", "ProductManager.Data", "{59072CAB-1156-4644-A47C-2013052ADF22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Data", "ProductManager.Models\ProductManager.Data.csproj", "{3D70E2F2-4C33-40A4-8E36-91571BAC5FB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Database", "ProductManager.Models\ProductManager.Database.csproj", "{3D70E2F2-4C33-40A4-8E36-91571BAC5FB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.Services", "ProductManager.Services", "{C957586F-6C7C-4FBE-B5A0-75D5AE49CDF8}"
 EndProject

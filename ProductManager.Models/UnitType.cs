@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProductManager.Models
+namespace ProductManager.Database
 {
     using System;
     using System.Collections.Generic;

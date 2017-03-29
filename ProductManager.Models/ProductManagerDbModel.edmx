@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProductManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProductManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
@@ -148,45 +148,18 @@
             <End Role="Sets" EntitySet="Sets" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProductManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ProductManagerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Products" EntityType="ProductManagerModel.Product" />
-          <EntitySet Name="ProductTypes" EntityType="ProductManagerModel.ProductType" />
-          <EntitySet Name="Sets" EntityType="ProductManagerModel.Set" />
-          <EntitySet Name="SetTypes" EntityType="ProductManagerModel.SetType" />
-          <EntitySet Name="Storages" EntityType="ProductManagerModel.Storage" />
-          <EntitySet Name="UnitTypes" EntityType="ProductManagerModel.UnitType" />
-          <AssociationSet Name="FK_Products_ProductTypes" Association="ProductManagerModel.FK_Products_ProductTypes">
-            <End Role="ProductType" EntitySet="ProductTypes" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Sets" Association="ProductManagerModel.FK_Products_Sets">
-            <End Role="Set" EntitySet="Sets" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Storages" Association="ProductManagerModel.FK_Products_Storages">
-            <End Role="Storage" EntitySet="Storages" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_UnitType" Association="ProductManagerModel.FK_Products_UnitType">
-            <End Role="UnitType" EntitySet="UnitTypes" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sets_SetTypes" Association="ProductManagerModel.FK_Sets_SetTypes">
-            <End Role="SetType" EntitySet="SetTypes" />
-            <End Role="Set" EntitySet="Sets" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SetId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
@@ -194,30 +167,30 @@
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="UnitTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProductType" Relationship="ProductManagerModel.FK_Products_ProductTypes" FromRole="Product" ToRole="ProductType" />
-          <NavigationProperty Name="Set" Relationship="ProductManagerModel.FK_Products_Sets" FromRole="Product" ToRole="Set" />
-          <NavigationProperty Name="Storage" Relationship="ProductManagerModel.FK_Products_Storages" FromRole="Product" ToRole="Storage" />
-          <NavigationProperty Name="UnitType" Relationship="ProductManagerModel.FK_Products_UnitType" FromRole="Product" ToRole="UnitType" />
+          <NavigationProperty Name="ProductType" Relationship="Self.FK_Products_ProductTypes" FromRole="Products" ToRole="ProductTypes" />
+          <NavigationProperty Name="Set" Relationship="Self.FK_Products_Sets" FromRole="Products" ToRole="Sets" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Products_Storages" FromRole="Products" ToRole="Storages" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_Products_UnitType" FromRole="Products" ToRole="UnitTypes" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_ProductTypes" FromRole="ProductType" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ProductTypes" FromRole="ProductTypes" ToRole="Products" />
         </EntityType>
         <EntityType Name="Set">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StorageId" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SeTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_Sets" FromRole="Set" ToRole="Product" />
-          <NavigationProperty Name="SetType" Relationship="ProductManagerModel.FK_Sets_SetTypes" FromRole="Set" ToRole="SetType" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Sets" FromRole="Sets" ToRole="Products" />
+          <NavigationProperty Name="SetType" Relationship="Self.FK_Sets_SetTypes" FromRole="Sets" ToRole="SetTypes" />
         </EntityType>
         <EntityType Name="SetType">
           <Key>
@@ -225,7 +198,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sets" Relationship="ProductManagerModel.FK_Sets_SetTypes" FromRole="SetType" ToRole="Set" />
+          <NavigationProperty Name="Sets" Relationship="Self.FK_Sets_SetTypes" FromRole="SetTypes" ToRole="Sets" />
         </EntityType>
         <EntityType Name="Storage">
           <Key>
@@ -235,140 +208,168 @@
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="Location" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_Storages" FromRole="Storage" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Storages" FromRole="Storages" ToRole="Products" />
         </EntityType>
         <EntityType Name="UnitType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="ProductManagerModel.FK_Products_UnitType" FromRole="UnitType" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_UnitType" FromRole="UnitTypes" ToRole="Products" />
         </EntityType>
         <Association Name="FK_Products_ProductTypes">
-          <End Type="ProductManagerModel.ProductType" Role="ProductType" Multiplicity="1" />
-          <End Type="ProductManagerModel.Product" Role="Product" Multiplicity="*" />
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductType">
+            <Principal Role="ProductTypes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="ProductTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Sets">
-          <End Type="ProductManagerModel.Set" Role="Set" Multiplicity="0..1" />
-          <End Type="ProductManagerModel.Product" Role="Product" Multiplicity="*" />
+          <End Role="Sets" Type="Self.Set" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Set">
+            <Principal Role="Sets">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="SetId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Storages">
-          <End Type="ProductManagerModel.Storage" Role="Storage" Multiplicity="1" />
-          <End Type="ProductManagerModel.Product" Role="Product" Multiplicity="*" />
+          <End Role="Storages" Type="Self.Storage" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Storage">
+            <Principal Role="Storages">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="StorageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_UnitType">
-          <End Type="ProductManagerModel.UnitType" Role="UnitType" Multiplicity="1" />
-          <End Type="ProductManagerModel.Product" Role="Product" Multiplicity="*" />
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UnitType">
+            <Principal Role="UnitTypes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="UnitTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sets_SetTypes">
-          <End Type="ProductManagerModel.SetType" Role="SetType" Multiplicity="1" />
-          <End Type="ProductManagerModel.Set" Role="Set" Multiplicity="*" />
+          <End Role="SetTypes" Type="Self.SetType" Multiplicity="1" />
+          <End Role="Sets" Type="Self.Set" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SetType">
+            <Principal Role="SetTypes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Set">
+            <Dependent Role="Sets">
               <PropertyRef Name="SeTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="ProductManagerDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+          <EntitySet Name="Sets" EntityType="Self.Set" />
+          <EntitySet Name="SetTypes" EntityType="Self.SetType" />
+          <EntitySet Name="Storages" EntityType="Self.Storage" />
+          <EntitySet Name="UnitTypes" EntityType="Self.UnitType" />
+          <AssociationSet Name="FK_Products_ProductTypes" Association="Self.FK_Products_ProductTypes">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Sets" Association="Self.FK_Products_Sets">
+            <End Role="Sets" EntitySet="Sets" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Storages" Association="Self.FK_Products_Storages">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_UnitType" Association="Self.FK_Products_UnitType">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
+            <End Role="SetTypes" EntitySet="SetTypes" />
+            <End Role="Sets" EntitySet="Sets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProductManagerModelStoreContainer" CdmEntityContainer="ProductManagerEntities">
+        <EntityContainerMapping StorageEntityContainer="ProductManagerModelStoreContainer" CdmEntityContainer="ProductManagerDbContext">
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ProductManagerModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
-                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SetId" ColumnName="SetId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SetId" ColumnName="SetId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.ProductType">
               <MappingFragment StoreEntitySet="ProductTypes">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sets">
             <EntityTypeMapping TypeName="ProductManagerModel.Set">
               <MappingFragment StoreEntitySet="Sets">
-                <ScalarProperty Name="SeTypeId" ColumnName="SeTypeId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SeTypeId" ColumnName="SeTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SetTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.SetType">
               <MappingFragment StoreEntitySet="SetTypes">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Storages">
             <EntityTypeMapping TypeName="ProductManagerModel.Storage">
               <MappingFragment StoreEntitySet="Storages">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitTypes">
             <EntityTypeMapping TypeName="ProductManagerModel.UnitType">
               <MappingFragment StoreEntitySet="UnitTypes">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

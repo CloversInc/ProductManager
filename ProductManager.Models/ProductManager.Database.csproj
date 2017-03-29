@@ -52,69 +52,70 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Product.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductManagerModel.Context.cs">
+    <Compile Include="ProductManagerDbContext.cs" />
+    <Compile Include="ProductManagerDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductManagerModel.Context.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductManagerModel.cs">
+    <Compile Include="ProductManagerDbModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductManagerModel.Designer.cs">
+    <Compile Include="ProductManagerDbModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductManagerModel.edmx</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ProductType.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Set.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SetType.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Storage.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitType.cs">
-      <DependentUpon>ProductManagerModel.tt</DependentUpon>
+      <DependentUpon>ProductManagerDbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ProductManagerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductManagerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
-    <None Include="ProductManagerModel.edmx.diagram">
-      <DependentUpon>ProductManagerModel.edmx</DependentUpon>
+    <EntityDeploy Include="ProductManagerDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductManagerDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ProductManagerDbModel.edmx.diagram">
+      <DependentUpon>ProductManagerDbModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ProductManagerModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductManagerModel.edmx</DependentUpon>
-      <LastGenOutput>ProductManagerModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ProductManagerModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductManagerModel.edmx</DependentUpon>
-      <LastGenOutput>ProductManagerModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ProductManagerDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductManagerDbModel.edmx</DependentUpon>
+      <LastGenOutput>ProductManagerDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProductManagerDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductManagerDbModel.edmx</DependentUpon>
+      <LastGenOutput>ProductManagerDbModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

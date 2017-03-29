@@ -2,10 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Data;
-    using Data.Repositories;
+    using Database;
+    using Database.Repositories;
     using Interfaces;
-    using Models;
 
     class SetService : ISetService
     {

@@ -1,8 +1,7 @@
 ﻿namespace ProductManager.ProductSevice
 {
     using System.Collections.Generic;
-    using Data;
-    using Models;
+    using Database;
 
     public interface IProductService
     {

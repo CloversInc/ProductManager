@@ -2,9 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Data;
-    using Data.Repositories;
-    using Models;
+    using Database;
+    using Database.Repositories;
 
     public class ProductService : IProductService
     {

@@ -49,9 +49,9 @@
     <Compile Include="StorageService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProductManager.Models\ProductManager.Data.csproj">
+    <ProjectReference Include="..\ProductManager.Models\ProductManager.Database.csproj">
       <Project>{3D70E2F2-4C33-40A4-8E36-91571BAC5FB6}</Project>
-      <Name>ProductManager.Data</Name>
+      <Name>ProductManager.Database</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

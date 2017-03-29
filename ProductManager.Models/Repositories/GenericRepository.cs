@@ -1,16 +1,16 @@
-﻿namespace ProductManager.Data.Repositories
+﻿namespace ProductManager.Database.Repositories
 {
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using Models;
+    using Database;
 
     public class GenericRepository<T> : IRepository<T> where T : class
     {
-        private readonly ProductManagerEntities context;
+        private readonly ProductManagerDbContext context;
         private readonly IDbSet<T> set;
 
-        public GenericRepository(ProductManagerEntities context)
+        public GenericRepository(ProductManagerDbContext context)
         {
             this.context = context;
             this.set = this.context.Set<T>();

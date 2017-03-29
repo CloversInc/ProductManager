@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProductManager.Models
+namespace ProductManager.Database
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProductManagerEntities : DbContext
+    public partial class ProductManagerDbContext : DbContext
     {
-        public ProductManagerEntities()
-            : base("name=ProductManagerEntities")
+        public ProductManagerDbContext()
+            : base("name=ProductManagerDbContext")
         {
+
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
