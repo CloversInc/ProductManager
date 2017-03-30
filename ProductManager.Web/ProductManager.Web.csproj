@@ -276,6 +276,10 @@
       <Project>{D67CF54E-487F-43FE-BADA-D654B98B75FC}</Project>
       <Name>ProductManager.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductManager.ViewModels\ProductManager.ViewModels.csproj">
+      <Project>{ba173a96-7860-45a9-b3c2-dc8f9b83e0dc}</Project>
+      <Name>ProductManager.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

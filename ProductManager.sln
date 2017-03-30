@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{87B14C49-2FE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Web", "ProductManager.Web\ProductManager.Web.csproj", "{425968BD-3066-4152-AB2B-EA93A0CCE7F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.ViewModels", "ProductManager.ViewModels\ProductManager.ViewModels.csproj", "{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +58,6 @@ Global
 		{D67CF54E-487F-43FE-BADA-D654B98B75FC} = {C957586F-6C7C-4FBE-B5A0-75D5AE49CDF8}
 		{765578A9-4BDD-4656-BA57-144B7C4F6D09} = {358F5DF4-9F49-405C-9B19-229150054AE6}
 		{425968BD-3066-4152-AB2B-EA93A0CCE7F1} = {87B14C49-2FEF-4B60-AEFA-C93A9143102D}
+		{BA173A96-7860-45A9-B3C2-DC8F9B83E0DC} = {06826D6B-6595-42A0-B08E-023A178D609A}
 	EndGlobalSection
 EndGlobal

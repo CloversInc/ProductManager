@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using Database;
+    using ViewModels;
 
     public interface IProductService
     {
-        IEnumerable<Product> GetAll();
+        IEnumerable<ProductViewModel> GetAll();
     }
 }
