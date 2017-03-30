@@ -1,7 +1,8 @@
-﻿using System.Web.Mvc;
-
-namespace ProductManager.Web.Controllers
+﻿namespace ProductManager.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using ProductManager.ViewModels;
     using Services.Interfaces;
 
     public class HomeController : Controller
@@ -15,7 +16,8 @@ namespace ProductManager.Web.Controllers
 
         public ActionResult Index()
         {
-            this.productService.GetAll();
+            IEnumerable<ProductViewModel> models = this.productService.GetAll();
+
             return View();
         }
 
