@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.Data", "ProductManager.Data", "{59072CAB-1156-4644-A47C-2013052ADF22}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{59072CAB-1156-4644-A47C-2013052ADF22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Database", "ProductManager.Models\ProductManager.Database.csproj", "{3D70E2F2-4C33-40A4-8E36-91571BAC5FB6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.Services", "ProductManager.Services", "{C957586F-6C7C-4FBE-B5A0-75D5AE49CDF8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C957586F-6C7C-4FBE-B5A0-75D5AE49CDF8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.Web", "ProductManager.Web", "{FA902A48-BE26-4F8A-B25D-E69296F14C4E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{06826D6B-6595-42A0-B08E-023A178D609A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManager.ViewModels", "ProductManager.ViewModels", "{06826D6B-6595-42A0-B08E-023A178D609A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Services", "ProductManager.ProductSevice\ProductManager.Services.csproj", "{D67CF54E-487F-43FE-BADA-D654B98B75FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.ProductSevice", "ProductManager.ProductSevice\ProductManager.ProductSevice.csproj", "{D67CF54E-487F-43FE-BADA-D654B98B75FC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{358F5DF4-9F49-405C-9B19-229150054AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Data", "ProductManager.Data\ProductManager.Data.csproj", "{765578A9-4BDD-4656-BA57-144B7C4F6D09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{87B14C49-2FEF-4B60-AEFA-C93A9143102D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManager.Web", "ProductManager.Web\ProductManager.Web.csproj", "{425968BD-3066-4152-AB2B-EA93A0CCE7F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +35,14 @@ Global
 		{D67CF54E-487F-43FE-BADA-D654B98B75FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D67CF54E-487F-43FE-BADA-D654B98B75FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D67CF54E-487F-43FE-BADA-D654B98B75FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765578A9-4BDD-4656-BA57-144B7C4F6D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765578A9-4BDD-4656-BA57-144B7C4F6D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765578A9-4BDD-4656-BA57-144B7C4F6D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765578A9-4BDD-4656-BA57-144B7C4F6D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425968BD-3066-4152-AB2B-EA93A0CCE7F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3D70E2F2-4C33-40A4-8E36-91571BAC5FB6} = {59072CAB-1156-4644-A47C-2013052ADF22}
 		{D67CF54E-487F-43FE-BADA-D654B98B75FC} = {C957586F-6C7C-4FBE-B5A0-75D5AE49CDF8}
+		{765578A9-4BDD-4656-BA57-144B7C4F6D09} = {358F5DF4-9F49-405C-9B19-229150054AE6}
+		{425968BD-3066-4152-AB2B-EA93A0CCE7F1} = {87B14C49-2FEF-4B60-AEFA-C93A9143102D}
 	EndGlobalSection
 EndGlobal

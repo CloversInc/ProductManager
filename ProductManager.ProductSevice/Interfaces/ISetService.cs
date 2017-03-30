@@ -1,10 +1,6 @@
-﻿namespace ProductManager.ProductSevice.Interfaces
+﻿namespace ProductManager.Services.Interfaces
 {
-    using System.Collections.Generic;
-    using Database;
-
-    interface ISetService
+    public  interface ISetService
     {
-        IEnumerable<Set> GetAll();
     }
 }

@@ -3,7 +3,7 @@
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using Database;
+    using Data.Interfaces;
 
     public class GenericRepository<T> : IRepository<T> where T : class
     {

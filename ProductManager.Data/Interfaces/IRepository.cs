@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ProductManager.Database.Repositories
+namespace ProductManager.Data.Interfaces
 {
     public interface IRepository<T>
     {

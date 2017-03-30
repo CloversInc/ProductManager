@@ -18,7 +18,6 @@ namespace ProductManager.Database
         public ProductManagerDbContext()
             : base("name=ProductManagerDbContext")
         {
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,6 +30,7 @@ namespace ProductManager.Database
         public virtual DbSet<Set> Sets { get; set; }
         public virtual DbSet<SetType> SetTypes { get; set; }
         public virtual DbSet<Storage> Storages { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UnitType> UnitTypes { get; set; }
     }
 }

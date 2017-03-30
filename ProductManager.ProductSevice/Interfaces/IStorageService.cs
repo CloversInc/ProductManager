@@ -1,10 +1,6 @@
-﻿namespace ProductManager.ProductSevice
+﻿namespace ProductManager.Services.Interfaces
 {
-    using System.Collections.Generic;
-    using Database;
-
-    internal interface IStorageService
+    public interface IStorageService
     {
-        IEnumerable<Storage> GetAll();
     }
 }
