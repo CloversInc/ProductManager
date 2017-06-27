@@ -1,5 +1,0 @@
-C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.ViewModels\bin\Debug\RestaurantManager.ViewModels.dll
-C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.ViewModels\bin\Debug\RestaurantManager.ViewModels.pdb
-C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.ViewModels\obj\Debug\RestaurantManager.ViewModels.csprojResolveAssemblyReference.cache
-C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.ViewModels\obj\Debug\RestaurantManager.ViewModels.dll
-C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.ViewModels\obj\Debug\RestaurantManager.ViewModels.pdb
