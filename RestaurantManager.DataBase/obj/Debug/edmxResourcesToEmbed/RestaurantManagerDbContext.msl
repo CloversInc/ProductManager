@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestaurantManagerModelStoreContainer" CdmEntityContainer="RestaurantManagerEntities1">
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="RestaurantManagerModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="RestaurantManagerModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="RestaurantManagerModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="RecipeTypeId" ColumnName="RecipeTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecipeTypes">
+      <EntityTypeMapping TypeName="RestaurantManagerModel.RecipeType">
+        <MappingFragment StoreEntitySet="RecipeTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitTypes">
+      <EntityTypeMapping TypeName="RestaurantManagerModel.UnitType">
+        <MappingFragment StoreEntitySet="UnitTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RecipesProducts" TypeName="RestaurantManagerModel.RecipesProducts" StoreEntitySet="RecipesProducts">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
+      </EndProperty>
+      <EndProperty Name="Recipes">
+        <ScalarProperty Name="Id" ColumnName="Recipe_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

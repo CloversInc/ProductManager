@@ -1,0 +1,10 @@
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\RestaurantManager.Data.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\RestaurantManager.Data.pdb
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\obj\Debug\RestaurantManager.Data.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\obj\Debug\RestaurantManager.Data.pdb
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\obj\Debug\RestaurantManager.Data.csprojResolveAssemblyReference.cache
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\EntityFramework.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\RestaurantManager.DataBase.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\RestaurantManager.DataBase.pdb
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\RestaurantManager.DataBase.dll.config
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.Data\bin\Debug\EntityFramework.xml

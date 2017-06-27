@@ -1,0 +1,10 @@
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\obj\Debug\RestaurantManager.DataBase.csprojResolveAssemblyReference.cache
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\RestaurantManager.DataBase.dll.config
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\RestaurantManager.DataBase.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\RestaurantManager.DataBase.pdb
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\EntityFramework.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\EntityFramework.xml
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\obj\Debug\RestaurantManager.DataBase.dll
+C:\Projects\RestaurantManager\RestaurantManager\RestaurantManager.DataBase\obj\Debug\RestaurantManager.DataBase.pdb
