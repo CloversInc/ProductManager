@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using RestaurantManager.Services.Interfaces;
-using RestaurantManager.ViewModels;
-
-namespace RestaurantManager.WebApp.Controllers
+﻿namespace RestaurantManager.WebApp.Controllers
 {
+    using System.Web.Mvc;
+    using Services.Interfaces;
+
     public class MenuController : Controller
     {
         private IMenuItemService menuItemService;
