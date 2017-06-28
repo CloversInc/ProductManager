@@ -103,6 +103,7 @@
       <DependentUpon>RestaurantManagerDbContext.edmx</DependentUpon>
       <LastGenOutput>RestaurantManagerDbContext.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="RestaurantManagerDbContext.edmx.sql" />
     <Content Include="RestaurantManagerDbContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RestaurantManagerDbContext.edmx</DependentUpon>

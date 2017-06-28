@@ -3,8 +3,9 @@ using RestaurantManager.ViewModels;
 
 namespace RestaurantManager.Services.Interfaces
 {
-    public interface IRecipeService
+    public interface IMenuItemService
     {
         IEnumerable<MenuItemViewModel> GetAll();
+        MenuItemPdfViewModel GetPdfViewModel();
     }
 }

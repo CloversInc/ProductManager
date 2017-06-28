@@ -1,0 +1,29 @@
+﻿@using RestaurantManager.ViewModels
+@model MenuItemPdfViewModel
+<h2>LunchMenu</h2>
+
+@foreach (var item in Model.MenuItemViewModels)
+{
+    ICollection<MenuItemViewModel> menuItems = item.Value;
+    <span>@menuItems.FirstOrDefault().MenuItemTypeName</span>
+    <select class="select" multiple="multiple">
+
+        @foreach (MenuItemViewModel menuItem in menuItems)
+        {
+            <option id="@menuItem.Id">@menuItem.Name</option>
+        }
+    </select>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("select").select2({
+                width: '100%',
+                matcher: function (params, data) {
+                    return matchStart(params, data);
+                },
+            });
+        });
+    </script>
+}

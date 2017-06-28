@@ -7,16 +7,17 @@ namespace RestaurantManager.WebApp.Controllers
 {
     public class MenuController : Controller
     {
-        private IRecipeService recipeService;
+        private IMenuItemService menuItemService;
 
-        public MenuController(IRecipeService recipeService)
+        public MenuController(IMenuItemService menuItemService)
         {
-            this.recipeService = recipeService;
+            this.menuItemService = menuItemService;
         }
 
-        public ActionResult LunchMenu()
+        public ActionResult MenuLunch()
         {
-            IEnumerable<MenuItemViewModel> model = this.recipeService.GetAll();
+            var model = this.menuItemService.GetPdfViewModel();
+
             return this.View(model);
         }
     }

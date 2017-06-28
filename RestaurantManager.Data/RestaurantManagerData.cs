@@ -19,7 +19,7 @@ namespace RestaurantManager.Data
         public IRestaurantManagerDbContext Context { get { return this.context; } }
         public IRepository<Product> Products { get { return this.GetRepository<Product>(); } }
         public IRepository<ProductType> ProductTypes { get { return this.GetRepository<ProductType>(); } }
-        public IRepository<MenuItem> Recipes { get { return this.GetRepository<MenuItem>(); } }
+        public IRepository<MenuItem> MenuItems { get { return this.GetRepository<MenuItem>(); } }
         public IRepository<MenuItemType> RecipeTypes { get { return this.GetRepository<MenuItemType>(); } }
         public IRepository<UnitType> UnitTypes { get { return this.GetRepository<UnitType>(); } }
 

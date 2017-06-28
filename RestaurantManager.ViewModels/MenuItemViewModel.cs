@@ -10,6 +10,8 @@ namespace RestaurantManager.ViewModels
 
         public string UnitTypeAmount { get; set; }
 
-        public virtual UnitType UnitType { get; set; }
+        public string MenuItemTypeName { get; set; }
+
+        public string UnitTypeName { get; set; }
     }
 }

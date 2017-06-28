@@ -9,7 +9,7 @@ namespace RestaurantManager.Data
 
         IRepository<Product> Products { get; }
         IRepository<ProductType> ProductTypes { get; }
-        IRepository<MenuItem> Recipes { get; }
+        IRepository<MenuItem> MenuItems { get; }
         IRepository<MenuItemType> RecipeTypes { get; }
         IRepository<UnitType> UnitTypes { get; }
 

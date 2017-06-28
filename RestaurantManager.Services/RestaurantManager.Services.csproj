@@ -45,10 +45,10 @@
   <ItemGroup>
     <Compile Include="Implementations\BaseService.cs" />
     <Compile Include="Implementations\ProductService.cs" />
-    <Compile Include="Implementations\RecipeService.cs" />
+    <Compile Include="Implementations\MenuItemService.cs" />
     <Compile Include="Configurations\MapperConfig.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
-    <Compile Include="Interfaces\IRecipeService.cs" />
+    <Compile Include="Interfaces\IMenuItemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

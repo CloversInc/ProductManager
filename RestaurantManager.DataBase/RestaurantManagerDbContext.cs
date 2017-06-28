@@ -15,17 +15,11 @@ namespace RestaurantManager.DataBase
             throw new UnintentionalCodeFirstException();
         }
 
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductType> ProductTypes { get; set; }
-        public virtual DbSet<MenuItem> Recipes { get; set; }
-        public virtual DbSet<MenuItemType> RecipeTypes { get; set; }
-        public virtual DbSet<UnitType> UnitTypes { get; set; }
-
-        IDbSet<Product> IRestaurantManagerDbContext.Products { get; }
-        IDbSet<ProductType> IRestaurantManagerDbContext.ProductTypes { get; }
-        IDbSet<MenuItem> IRestaurantManagerDbContext.Recipes { get; }
-        IDbSet<MenuItemType> IRestaurantManagerDbContext.RecipeTypes { get; }
-        IDbSet<UnitType> IRestaurantManagerDbContext.UnitTypes { get; }
+        public IDbSet<Product> Products { get; }
+        public IDbSet<ProductType> ProductTypes { get; }
+        public IDbSet<MenuItem> Recipes { get; }
+        public IDbSet<MenuItemType> RecipeTypes { get; }
+        public IDbSet<UnitType> UnitTypes { get; }
 
         public int SaveChanges()
         {
