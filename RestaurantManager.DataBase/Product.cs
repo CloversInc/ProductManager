@@ -17,7 +17,7 @@ namespace RestaurantManager.DataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Recipes = new HashSet<Recipe>();
+            this.MenuItems = new HashSet<MenuItem>();
         }
     
         public int Id { get; set; }
@@ -26,12 +26,12 @@ namespace RestaurantManager.DataBase
         public string Description { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int ProductTypeId { get; set; }
-        public double Amount { get; set; }
+        public double UnitTypeAmount { get; set; }
         public int UnitTypeId { get; set; }
     
         public virtual ProductType ProductType { get; set; }
         public virtual UnitType UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<MenuItem> MenuItems { get; set; }
     }
 }

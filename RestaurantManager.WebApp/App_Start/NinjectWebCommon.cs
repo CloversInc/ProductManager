@@ -72,6 +72,7 @@ namespace RestaurantManager.WebApp.App_Start
             kernel.Bind<IRestaurantManagerData>().To<RestaurantManagerData>();
 
             kernel.Bind<IProductService>().To<ProductService>();
+            kernel.Bind<IRecipeService>().To<RecipeService>();
         }
     }
 }

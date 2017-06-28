@@ -1,39 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using RestaurantManager.Services.Implementations;
+using RestaurantManager.Services.Interfaces;
 using RestaurantManager.ViewModels;
 
 namespace RestaurantManager.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private ProductService productService;
+        private IProductService productService;
 
-        public HomeController(ProductService productService)
+        public HomeController(IProductService productService)
         {
             this.productService = productService;
         }
 
-
         public ActionResult Index()
         {
-            IEnumerable<ProductViewModel> models = this.productService.GetAll();
-
-            return View();
+            var model = this.productService.GetAll();
+            return View(model);
         }
 
-        public ActionResult About()
+        public ActionResult CreateWindow()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            throw new System.NotImplementedException();
         }
     }
 }

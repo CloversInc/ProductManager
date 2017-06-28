@@ -7,21 +7,21 @@ using RestaurantManager.ViewModels;
 
 namespace RestaurantManager.Services.Implementations
 {
-    public class ProductService : BaseService, IProductService
+    public class RecipeService : BaseService, IRecipeService
     {
-        public ProductService(IRestaurantManagerData data)
+        public RecipeService(IRestaurantManagerData data)
             : base(data)
         {
         }
 
-        public IEnumerable<ProductViewModel> GetAll()
+        public IEnumerable<MenuItemViewModel> GetAll()
         {
             //Custom mapping example
             //Mapper.Initialize(cfg => cfg.CreateMap<Product, ProductViewModel>()
             //    .ForMember(d => d.Description, opt => opt.ResolveUsing(res => res.Name)));
 
-            IEnumerable<Product> dbProducts = this.Data.Products.GetAll();
-            IEnumerable<ProductViewModel> result = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(dbProducts);
+            IEnumerable<MenuItem> dbProducts = this.Data.Recipes.GetAll();
+            IEnumerable<MenuItemViewModel> result = Mapper.Map<IEnumerable<MenuItem>, IEnumerable<MenuItemViewModel>>(dbProducts);
 
             return result;
         }

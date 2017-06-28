@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="RestaurantManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UnitTypeId" Type="int" />
+          <Property Name="UnitTypeAmount" Type="nchar" MaxLength="10" />
+          <Property Name="RecipeTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItemTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,7 +33,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ProductTypeId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="float" Nullable="false" />
           <Property Name="UnitTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductTypes">
@@ -25,29 +43,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <EntityType Name="Recipes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="RecipeTypeId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="RecipesProducts">
           <Key>
             <PropertyRef Name="Product_Id" />
-            <PropertyRef Name="Recipe_Id" />
+            <PropertyRef Name="MenuItem_Id" />
           </Key>
           <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="Recipe_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RecipeTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" />
+          <Property Name="MenuItem_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UnitTypes">
           <Key>
@@ -80,14 +82,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sets_SetTypes">
-          <End Role="RecipeTypes" Type="Self.RecipeTypes" Multiplicity="1" />
-          <End Role="Recipes" Type="Self.Recipes" Multiplicity="*" />
+        <Association Name="FK_Recipes_UnitTypes">
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="0..1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RecipeTypes">
+            <Principal Role="UnitTypes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Recipes">
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="UnitTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sets_SetTypes">
+          <End Role="MenuItemTypes" Type="Self.MenuItemTypes" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItemTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
               <PropertyRef Name="RecipeTypeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -105,23 +119,23 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SetsProducts_Sets">
-          <End Role="Recipes" Type="Self.Recipes" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
           <End Role="RecipesProducts" Type="Self.RecipesProducts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Recipes">
+            <Principal Role="MenuItem">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="RecipesProducts">
-              <PropertyRef Name="Recipe_Id" />
+              <PropertyRef Name="MenuItem_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RestaurantManagerModelStoreContainer">
+          <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipesProducts" EntityType="Self.RecipesProducts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RecipeTypes" EntityType="Self.RecipeTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitTypes" EntityType="Self.UnitTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Products_ProductTypes" Association="Self.FK_Products_ProductTypes">
             <End Role="ProductTypes" EntitySet="ProductTypes" />
@@ -131,16 +145,20 @@
             <End Role="UnitTypes" EntitySet="UnitTypes" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Recipes_UnitTypes" Association="Self.FK_Recipes_UnitTypes">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
-            <End Role="RecipeTypes" EntitySet="RecipeTypes" />
-            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="MenuItemTypes" EntitySet="MenuItemTypes" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
           </AssociationSet>
           <AssociationSet Name="FK_SetsProducts_Products" Association="Self.FK_SetsProducts_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="RecipesProducts" EntitySet="RecipesProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_SetsProducts_Sets" Association="Self.FK_SetsProducts_Sets">
-            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
             <End Role="RecipesProducts" EntitySet="RecipesProducts" />
           </AssociationSet>
         </EntityContainer>
@@ -149,6 +167,28 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UnitTypeId" Type="Int32" />
+          <Property Name="UnitTypeAmount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RecipeTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_Recipes_UnitTypes" FromRole="MenuItem" ToRole="UnitTypes" />
+          <NavigationProperty Name="MenuItemType" Relationship="Self.FK_Sets_SetTypes" FromRole="MenuItem" ToRole="MenuItemTypes" />
+          <NavigationProperty Name="Products" Relationship="Self.RecipesProducts" FromRole="MenuItem" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="MenuItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.FK_Sets_SetTypes" FromRole="MenuItemTypes" ToRole="MenuItem" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -159,11 +199,11 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="Double" Nullable="false" />
           <Property Name="UnitTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Products_ProductTypes" FromRole="Products" ToRole="ProductTypes" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_Products_UnitType" FromRole="Products" ToRole="UnitTypes" />
-          <NavigationProperty Name="Recipes" Relationship="Self.RecipesProducts" FromRole="Products" ToRole="Recipes" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.RecipesProducts" FromRole="Products" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -173,33 +213,39 @@
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ProductTypes" FromRole="ProductTypes" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Recipe">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RecipeTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RecipeType" Relationship="Self.FK_Sets_SetTypes" FromRole="Recipes" ToRole="RecipeTypes" />
-          <NavigationProperty Name="Products" Relationship="Self.RecipesProducts" FromRole="Recipes" ToRole="Products" />
-        </EntityType>
-        <EntityType Name="RecipeType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Sets_SetTypes" FromRole="RecipeTypes" ToRole="Recipes" />
-        </EntityType>
         <EntityType Name="UnitType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.FK_Recipes_UnitTypes" FromRole="UnitTypes" ToRole="MenuItem" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_UnitType" FromRole="UnitTypes" ToRole="Products" />
         </EntityType>
+        <Association Name="FK_Recipes_UnitTypes">
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="0..1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="UnitTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sets_SetTypes">
+          <End Role="MenuItemTypes" Type="Self.MenuItemType" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItemTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="RecipeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_ProductTypes">
           <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
           <End Role="Products" Type="Self.Product" Multiplicity="*" />
@@ -224,28 +270,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sets_SetTypes">
-          <End Role="RecipeTypes" Type="Self.RecipeType" Multiplicity="1" />
-          <End Role="Recipes" Type="Self.Recipe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RecipeTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Recipes">
-              <PropertyRef Name="RecipeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="RecipesProducts">
           <End Role="Products" Type="Self.Product" Multiplicity="*" />
-          <End Role="Recipes" Type="Self.Recipe" Multiplicity="*" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="RestaurantManagerEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RestaurantManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
+          <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemType" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
-          <EntitySet Name="RecipeTypes" EntityType="Self.RecipeType" />
           <EntitySet Name="UnitTypes" EntityType="Self.UnitType" />
+          <AssociationSet Name="FK_Recipes_UnitTypes" Association="Self.FK_Recipes_UnitTypes">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
+            <End Role="MenuItemTypes" EntitySet="MenuItemTypes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_Products_ProductTypes" Association="Self.FK_Products_ProductTypes">
             <End Role="ProductTypes" EntitySet="ProductTypes" />
             <End Role="Products" EntitySet="Products" />
@@ -254,13 +296,9 @@
             <End Role="UnitTypes" EntitySet="UnitTypes" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
-            <End Role="RecipeTypes" EntitySet="RecipeTypes" />
-            <End Role="Recipes" EntitySet="Recipes" />
-          </AssociationSet>
           <AssociationSet Name="RecipesProducts" Association="Self.RecipesProducts">
             <End Role="Products" EntitySet="Products" />
-            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -268,7 +306,27 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RestaurantManagerModelStoreContainer" CdmEntityContainer="RestaurantManagerEntities1">
+        <EntityContainerMapping StorageEntityContainer="RestaurantManagerModelStoreContainer" CdmEntityContainer="RestaurantManagerEntities">
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="RestaurantManagerModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
+                <ScalarProperty Name="RecipeTypeId" ColumnName="RecipeTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItemTypes">
+            <EntityTypeMapping TypeName="RestaurantManagerModel.MenuItemType">
+              <MappingFragment StoreEntitySet="MenuItemTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="RestaurantManagerModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -278,7 +336,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
                 <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -286,24 +344,6 @@
           <EntitySetMapping Name="ProductTypes">
             <EntityTypeMapping TypeName="RestaurantManagerModel.ProductType">
               <MappingFragment StoreEntitySet="ProductTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Recipes">
-            <EntityTypeMapping TypeName="RestaurantManagerModel.Recipe">
-              <MappingFragment StoreEntitySet="Recipes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="RecipeTypeId" ColumnName="RecipeTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RecipeTypes">
-            <EntityTypeMapping TypeName="RestaurantManagerModel.RecipeType">
-              <MappingFragment StoreEntitySet="RecipeTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -321,8 +361,8 @@
             <EndProperty Name="Products">
               <ScalarProperty Name="Id" ColumnName="Product_Id" />
             </EndProperty>
-            <EndProperty Name="Recipes">
-              <ScalarProperty Name="Id" ColumnName="Recipe_Id" />
+            <EndProperty Name="MenuItem">
+              <ScalarProperty Name="Id" ColumnName="MenuItem_Id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

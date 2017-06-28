@@ -17,14 +17,14 @@ namespace RestaurantManager.DataBase
 
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
-        public virtual DbSet<Recipe> Recipes { get; set; }
-        public virtual DbSet<RecipeType> RecipeTypes { get; set; }
+        public virtual DbSet<MenuItem> Recipes { get; set; }
+        public virtual DbSet<MenuItemType> RecipeTypes { get; set; }
         public virtual DbSet<UnitType> UnitTypes { get; set; }
 
         IDbSet<Product> IRestaurantManagerDbContext.Products { get; }
         IDbSet<ProductType> IRestaurantManagerDbContext.ProductTypes { get; }
-        IDbSet<Recipe> IRestaurantManagerDbContext.Recipes { get; }
-        IDbSet<RecipeType> IRestaurantManagerDbContext.RecipeTypes { get; }
+        IDbSet<MenuItem> IRestaurantManagerDbContext.Recipes { get; }
+        IDbSet<MenuItemType> IRestaurantManagerDbContext.RecipeTypes { get; }
         IDbSet<UnitType> IRestaurantManagerDbContext.UnitTypes { get; }
 
         public int SaveChanges()

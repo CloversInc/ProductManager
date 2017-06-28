@@ -12,18 +12,24 @@ namespace RestaurantManager.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class RecipeType
+    public partial class MenuItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RecipeType()
+        public MenuItem()
         {
-            this.Recipes = new HashSet<Recipe>();
+            this.Products = new HashSet<Product>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<int> UnitTypeId { get; set; }
+        public string UnitTypeAmount { get; set; }
+        public int RecipeTypeId { get; set; }
     
+        public virtual UnitType UnitType { get; set; }
+        public virtual MenuItemType MenuItemType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -42,6 +42,13 @@
   <ItemGroup>
     <Compile Include="ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MenuItemViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RestaurantManager.DataBase\RestaurantManager.DataBase.csproj">
+      <Project>{94D7CF67-A0D3-4824-BF10-6FA973F769D7}</Project>
+      <Name>RestaurantManager.DataBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

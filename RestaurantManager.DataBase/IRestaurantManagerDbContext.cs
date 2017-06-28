@@ -6,8 +6,8 @@
     {
         IDbSet<Product> Products { get; }
         IDbSet<ProductType> ProductTypes { get; }
-        IDbSet<Recipe> Recipes { get; }
-        IDbSet<RecipeType> RecipeTypes { get; }
+        IDbSet<MenuItem> Recipes { get; }
+        IDbSet<MenuItemType> RecipeTypes { get; }
         IDbSet<UnitType> UnitTypes { get; }
 
         int SaveChanges();

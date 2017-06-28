@@ -1,4 +1,5 @@
 ﻿using RestaurantManager.Data;
+using RestaurantManager.Services.Configurations;
 
 namespace RestaurantManager.Services.Implementations
 {
@@ -9,6 +10,7 @@ namespace RestaurantManager.Services.Implementations
         protected BaseService(IRestaurantManagerData data)
         {
             this.data = data;
+            MapperConfig.Initilize();
         }
 
         public IRestaurantManagerData Data { get { return this.data; } }
