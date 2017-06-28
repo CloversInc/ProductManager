@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
         </EntityType>
@@ -167,67 +167,94 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RestaurantManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MenuItems" EntityType="RestaurantManagerModel.MenuItem" />
+          <EntitySet Name="MenuItemTypes" EntityType="RestaurantManagerModel.MenuItemType" />
+          <EntitySet Name="Products" EntityType="RestaurantManagerModel.Product" />
+          <EntitySet Name="ProductTypes" EntityType="RestaurantManagerModel.ProductType" />
+          <EntitySet Name="UnitTypes" EntityType="RestaurantManagerModel.UnitType" />
+          <AssociationSet Name="FK_Recipes_UnitTypes" Association="RestaurantManagerModel.FK_Recipes_UnitTypes">
+            <End Role="UnitType" EntitySet="UnitTypes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sets_SetTypes" Association="RestaurantManagerModel.FK_Sets_SetTypes">
+            <End Role="MenuItemType" EntitySet="MenuItemTypes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ProductTypes" Association="RestaurantManagerModel.FK_Products_ProductTypes">
+            <End Role="ProductType" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_UnitType" Association="RestaurantManagerModel.FK_Products_UnitType">
+            <End Role="UnitType" EntitySet="UnitTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="MenuItemsProducts" Association="RestaurantManagerModel.MenuItemsProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="MenuItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UnitTypeId" Type="Int32" />
           <Property Name="UnitTypeAmount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MenuItemTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UnitType" Relationship="Self.FK_Recipes_UnitTypes" FromRole="MenuItem" ToRole="UnitTypes" />
-          <NavigationProperty Name="MenuItemType" Relationship="Self.FK_Sets_SetTypes" FromRole="MenuItem" ToRole="MenuItemTypes" />
-          <NavigationProperty Name="Products" Relationship="Self.MenuItemsProducts" FromRole="MenuItem" ToRole="Products" />
+          <NavigationProperty Name="UnitType" Relationship="RestaurantManagerModel.FK_Recipes_UnitTypes" FromRole="MenuItem" ToRole="UnitType" />
+          <NavigationProperty Name="MenuItemType" Relationship="RestaurantManagerModel.FK_Sets_SetTypes" FromRole="MenuItem" ToRole="MenuItemType" />
+          <NavigationProperty Name="Products" Relationship="RestaurantManagerModel.MenuItemsProducts" FromRole="MenuItem" ToRole="Product" />
         </EntityType>
         <EntityType Name="MenuItemType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MenuItems" Relationship="Self.FK_Sets_SetTypes" FromRole="MenuItemTypes" ToRole="MenuItem" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuItems" Relationship="RestaurantManagerModel.FK_Sets_SetTypes" FromRole="MenuItemType" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
           <Property Name="UnitTypeAmount" Type="Double" Nullable="false" />
           <Property Name="UnitTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProductType" Relationship="Self.FK_Products_ProductTypes" FromRole="Products" ToRole="ProductTypes" />
-          <NavigationProperty Name="UnitType" Relationship="Self.FK_Products_UnitType" FromRole="Products" ToRole="UnitTypes" />
-          <NavigationProperty Name="MenuItems" Relationship="Self.MenuItemsProducts" FromRole="Products" ToRole="MenuItem" />
+          <NavigationProperty Name="ProductType" Relationship="RestaurantManagerModel.FK_Products_ProductTypes" FromRole="Product" ToRole="ProductType" />
+          <NavigationProperty Name="UnitType" Relationship="RestaurantManagerModel.FK_Products_UnitType" FromRole="Product" ToRole="UnitType" />
+          <NavigationProperty Name="MenuItems" Relationship="RestaurantManagerModel.MenuItemsProducts" FromRole="Product" ToRole="MenuItem" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ProductTypes" FromRole="ProductTypes" ToRole="Products" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="RestaurantManagerModel.FK_Products_ProductTypes" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="UnitType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MenuItems" Relationship="Self.FK_Recipes_UnitTypes" FromRole="UnitTypes" ToRole="MenuItem" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_UnitType" FromRole="UnitTypes" ToRole="Products" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuItems" Relationship="RestaurantManagerModel.FK_Recipes_UnitTypes" FromRole="UnitType" ToRole="MenuItem" />
+          <NavigationProperty Name="Products" Relationship="RestaurantManagerModel.FK_Products_UnitType" FromRole="UnitType" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Recipes_UnitTypes">
-          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="0..1" />
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.UnitType" Role="UnitType" Multiplicity="0..1" />
+          <End Type="RestaurantManagerModel.MenuItem" Role="MenuItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UnitTypes">
+            <Principal Role="UnitType">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MenuItem">
@@ -236,10 +263,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sets_SetTypes">
-          <End Role="MenuItemTypes" Type="Self.MenuItemType" Multiplicity="1" />
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.MenuItemType" Role="MenuItemType" Multiplicity="1" />
+          <End Type="RestaurantManagerModel.MenuItem" Role="MenuItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MenuItemTypes">
+            <Principal Role="MenuItemType">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MenuItem">
@@ -248,60 +275,33 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_ProductTypes">
-          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.ProductType" Role="ProductType" Multiplicity="1" />
+          <End Type="RestaurantManagerModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductTypes">
+            <Principal Role="ProductType">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Products">
+            <Dependent Role="Product">
               <PropertyRef Name="ProductTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_UnitType">
-          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.UnitType" Role="UnitType" Multiplicity="1" />
+          <End Type="RestaurantManagerModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UnitTypes">
+            <Principal Role="UnitType">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Products">
+            <Dependent Role="Product">
               <PropertyRef Name="UnitTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="MenuItemsProducts">
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="RestaurantManagerModel.MenuItem" Role="MenuItem" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="RestaurantManagerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
-          <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemType" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
-          <EntitySet Name="UnitTypes" EntityType="Self.UnitType" />
-          <AssociationSet Name="FK_Recipes_UnitTypes" Association="Self.FK_Recipes_UnitTypes">
-            <End Role="UnitTypes" EntitySet="UnitTypes" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sets_SetTypes" Association="Self.FK_Sets_SetTypes">
-            <End Role="MenuItemTypes" EntitySet="MenuItemTypes" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_ProductTypes" Association="Self.FK_Products_ProductTypes">
-            <End Role="ProductTypes" EntitySet="ProductTypes" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_UnitType" Association="Self.FK_Products_UnitType">
-            <End Role="UnitTypes" EntitySet="UnitTypes" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="MenuItemsProducts" Association="Self.MenuItemsProducts">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -311,12 +311,12 @@
           <EntitySetMapping Name="MenuItems">
             <EntityTypeMapping TypeName="RestaurantManagerModel.MenuItem">
               <MappingFragment StoreEntitySet="MenuItem">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
-                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
                 <ScalarProperty Name="MenuItemTypeId" ColumnName="MenuItemTypeId" />
+                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -324,47 +324,47 @@
             <EntityTypeMapping TypeName="RestaurantManagerModel.MenuItemType">
               <MappingFragment StoreEntitySet="MenuItemTypes">
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="RestaurantManagerModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
-                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
                 <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="UnitTypeAmount" ColumnName="UnitTypeAmount" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductTypes">
             <EntityTypeMapping TypeName="RestaurantManagerModel.ProductType">
               <MappingFragment StoreEntitySet="ProductTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitTypes">
             <EntityTypeMapping TypeName="RestaurantManagerModel.UnitType">
               <MappingFragment StoreEntitySet="UnitTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="MenuItemsProducts" TypeName="RestaurantManagerModel.MenuItemsProducts" StoreEntitySet="MenuItemsProducts">
-            <EndProperty Name="Products">
-              <ScalarProperty Name="Id" ColumnName="Product_Id" />
-            </EndProperty>
             <EndProperty Name="MenuItem">
               <ScalarProperty Name="Id" ColumnName="MenuItem_Id" />
+            </EndProperty>
+            <EndProperty Name="Product">
+              <ScalarProperty Name="Id" ColumnName="Product_Id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

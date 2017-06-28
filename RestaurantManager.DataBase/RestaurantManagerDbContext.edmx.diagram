@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d05caef9ac5d44c3961ea480c27bd493" Name="Diagram1">
-        <EntityTypeShape EntityType="RestaurantManagerModel.MenuItem" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantManagerModel.MenuItemType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantManagerModel.Product" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantManagerModel.ProductType" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantManagerModel.UnitType" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <AssociationConnector Association="RestaurantManagerModel.FK_Recipes_UnitTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantManagerModel.FK_Sets_SetTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantManagerModel.FK_Products_ProductTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantManagerModel.FK_Products_UnitType" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantManagerModel.MenuItemsProducts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RestaurantManagerModel.MenuItem" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="RestaurantManagerModel.MenuItemType" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="RestaurantManagerModel.Product" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="RestaurantManagerModel.ProductType" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="RestaurantManagerModel.UnitType" Width="1.5" PointX="4.125" PointY="7.875" />
+        <AssociationConnector Association="RestaurantManagerModel.FK_Recipes_UnitTypes" />
+        <AssociationConnector Association="RestaurantManagerModel.FK_Sets_SetTypes" />
+        <AssociationConnector Association="RestaurantManagerModel.FK_Products_ProductTypes" />
+        <AssociationConnector Association="RestaurantManagerModel.FK_Products_UnitType" />
+        <AssociationConnector Association="RestaurantManagerModel.MenuItemsProducts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
