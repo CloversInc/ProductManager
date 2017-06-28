@@ -17,8 +17,8 @@ namespace RestaurantManager.DataBase
 
         public IDbSet<Product> Products { get; }
         public IDbSet<ProductType> ProductTypes { get; }
-        public IDbSet<MenuItem> Recipes { get; }
-        public IDbSet<MenuItemType> RecipeTypes { get; }
+        public IDbSet<MenuItem> MenuItem { get; }
+        public IDbSet<MenuItemType> MenuItemTypes { get; }
         public IDbSet<UnitType> UnitTypes { get; }
 
         public int SaveChanges()
