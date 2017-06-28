@@ -10,10 +10,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="UnitTypeId" Type="int" />
-          <Property Name="UnitTypeAmount" Type="nchar" MaxLength="10" />
+          <Property Name="UnitTypeId" Type="int" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="int" Nullable="false" />
           <Property Name="MenuItemTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MenuItemsProducts">
@@ -28,8 +28,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
@@ -37,12 +37,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ProductTypeId" Type="int" Nullable="false" />
-          <Property Name="UnitTypeAmount" Type="float" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="int" Nullable="false" />
           <Property Name="UnitTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductTypes">
@@ -50,7 +50,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="UnitTypes">
           <Key>
@@ -84,7 +84,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipes_UnitTypes">
-          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="0..1" />
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="1" />
           <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UnitTypes">
@@ -199,10 +199,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UnitTypeId" Type="Int32" />
-          <Property Name="UnitTypeAmount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UnitTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="Int32" Nullable="false" />
           <Property Name="MenuItemTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UnitType" Relationship="RestaurantManagerModel.FK_Recipes_UnitTypes" FromRole="MenuItem" ToRole="UnitType" />
           <NavigationProperty Name="MenuItemType" Relationship="RestaurantManagerModel.FK_Sets_SetTypes" FromRole="MenuItem" ToRole="MenuItemType" />
@@ -212,8 +212,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MenuItems" Relationship="RestaurantManagerModel.FK_Sets_SetTypes" FromRole="MenuItemType" ToRole="MenuItem" />
         </EntityType>
@@ -222,12 +222,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
-          <Property Name="UnitTypeAmount" Type="Double" Nullable="false" />
+          <Property Name="UnitTypeAmount" Type="Int32" Nullable="false" />
           <Property Name="UnitTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductType" Relationship="RestaurantManagerModel.FK_Products_ProductTypes" FromRole="Product" ToRole="ProductType" />
           <NavigationProperty Name="UnitType" Relationship="RestaurantManagerModel.FK_Products_UnitType" FromRole="Product" ToRole="UnitType" />
@@ -238,7 +238,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="RestaurantManagerModel.FK_Products_ProductTypes" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="UnitType">
@@ -251,7 +251,7 @@
           <NavigationProperty Name="Products" Relationship="RestaurantManagerModel.FK_Products_UnitType" FromRole="UnitType" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Recipes_UnitTypes">
-          <End Type="RestaurantManagerModel.UnitType" Role="UnitType" Multiplicity="0..1" />
+          <End Type="RestaurantManagerModel.UnitType" Role="UnitType" Multiplicity="1" />
           <End Type="RestaurantManagerModel.MenuItem" Role="MenuItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UnitType">
@@ -302,7 +302,7 @@
           <End Type="RestaurantManagerModel.Product" Role="Product" Multiplicity="*" />
           <End Type="RestaurantManagerModel.MenuItem" Role="MenuItem" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

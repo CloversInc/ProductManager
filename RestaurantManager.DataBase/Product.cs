@@ -26,7 +26,7 @@ namespace RestaurantManager.DataBase
         public string Description { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int ProductTypeId { get; set; }
-        public double UnitTypeAmount { get; set; }
+        public int UnitTypeAmount { get; set; }
         public int UnitTypeId { get; set; }
     
         public virtual ProductType ProductType { get; set; }

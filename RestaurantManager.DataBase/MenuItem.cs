@@ -23,8 +23,8 @@ namespace RestaurantManager.DataBase
         public int Id { get; set; }
         public string Name { get; set; }
         public System.DateTime CreatedOn { get; set; }
-        public Nullable<int> UnitTypeId { get; set; }
-        public string UnitTypeAmount { get; set; }
+        public int UnitTypeId { get; set; }
+        public int UnitTypeAmount { get; set; }
         public int MenuItemTypeId { get; set; }
     
         public virtual UnitType UnitType { get; set; }
