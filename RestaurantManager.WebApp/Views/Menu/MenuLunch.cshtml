@@ -9,7 +9,7 @@
         {
             ICollection<MenuItemViewModel> menuItems = item.Value;
             <span>@menuItems.FirstOrDefault().MenuItemTypeName</span>
-            <select class="select" multiple="multiple">
+            <select class="select" multiple="multiple" data-placeholder="Избери @menuItems.FirstOrDefault().MenuItemTypeName.ToLower()">
 
                 @foreach (MenuItemViewModel menuItem in menuItems)
                 {

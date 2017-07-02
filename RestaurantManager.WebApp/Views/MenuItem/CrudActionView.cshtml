@@ -23,9 +23,12 @@
                         @Html.HiddenFor(model => Model.UnitTypeName)
                         @Html.LabelFor(m => Model.UnitTypeName, "Мерна единица")
                         <select class="single-select-unit-type">
+                            <option></option>
                             @foreach (var item in Model.UnitTypesViewModel)
-                            {
-                                <option id="@item.Id">@item.Name</option>
+                            {                                
+                                string selected = "";
+                                if (item.Name == Model.UnitTypeName) {selected = "selected";}
+                                <option id="@item.Id" @selected >@item.Name</option>
                             }
                         </select>
                     </div>
@@ -35,9 +38,12 @@
                         @Html.HiddenFor(model => Model.MenuItemTypeName)
                         @Html.LabelFor(m => Model.MenuItemTypeName, "Тип")
                         <select class="single-select-menu-item-type">
+                            <option></option>
                             @foreach (var item in Model.MenuItemTypesViewModel)
                             {
-                                <option id="@item.Id">@item.Name</option>
+                                string selected = "";
+                                if (item.Name == Model.MenuItemTypeName) {selected = "selected";}
+                                <option id="@item.Id" @selected >@item.Name</option>
                             }
                         </select>
                     </div>
