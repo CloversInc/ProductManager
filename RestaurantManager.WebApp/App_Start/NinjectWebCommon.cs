@@ -1,4 +1,3 @@
-
 using RestaurantManager.Data;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(RestaurantManager.WebApp.App_Start.NinjectWebCommon), "Start")]
@@ -8,7 +7,7 @@ namespace RestaurantManager.WebApp.App_Start
 {
     using System;
     using System.Web;
-
+    using BindingViewModels.Mapper;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -70,7 +69,8 @@ namespace RestaurantManager.WebApp.App_Start
         {
             kernel.Bind<IRestaurantManagerDbContext>().To<RestaurantManagerDbContext>();
             kernel.Bind<IRestaurantManagerData>().To<RestaurantManagerData>();
-
+            kernel.Bind<IMappingService>().To<MappingService>();
+            
             kernel.Bind<IProductService>().To<ProductService>();
             kernel.Bind<IMenuItemService>().To<MenuItemService>();
         }

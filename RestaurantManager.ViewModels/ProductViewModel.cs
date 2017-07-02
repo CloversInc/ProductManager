@@ -1,6 +1,9 @@
-﻿namespace RestaurantManager.ViewModels
+﻿namespace RestaurantManager.BindingViewModels
 {
-    public class ProductViewModel
+    using DataBase;
+    using Mapper;
+
+    public class ProductViewModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 

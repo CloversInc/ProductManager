@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
-using RestaurantManager.Data;
-using RestaurantManager.DataBase;
-using RestaurantManager.Services.Interfaces;
-using RestaurantManager.ViewModels;
-
-namespace RestaurantManager.Services.Implementations
+﻿namespace RestaurantManager.Services.Implementations
 {
+    using System.Collections.Generic;
+    using BindingViewModels;
+    using BindingViewModels.Mapper;
+    using Data;
+    using DataBase;
+    using Interfaces;
+
     public class ProductService : BaseService, IProductService
     {
-        public ProductService(IRestaurantManagerData data)
-            : base(data)
+        public ProductService(IRestaurantManagerData data, IMappingService mappingService)
+            : base(data, mappingService)
         {
         }
 
@@ -21,7 +21,8 @@ namespace RestaurantManager.Services.Implementations
             //    .ForMember(d => d.Description, opt => opt.ResolveUsing(res => res.Name)));
 
             IEnumerable<Product> dbProducts = this.Data.Products.GetAll();
-            IEnumerable<ProductViewModel> result = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(dbProducts);
+
+            IEnumerable<ProductViewModel> result = this.MappingService.Map<IEnumerable<ProductViewModel>>(dbProducts);
 
             return result;
         }

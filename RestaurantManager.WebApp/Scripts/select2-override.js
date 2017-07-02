@@ -1,8 +1,9 @@
 ﻿function matchStart(params, data) {
-    params.term = params.term || '';
-    if (data.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+    params.term = params.term || "";
+    if (data.text.toUpperCase().indexOf(params.term.toUpperCase()) === 0) {
         return data;
     }
+
     return false;
 }
 
@@ -20,4 +21,3 @@ $.fn.select2.amd.require(['select2/results'], function (Results) {
         return (oldOption.apply(this, [data]));
     };
 });
-

@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.Services", "RestaurantManager.Services\RestaurantManager.Services.csproj", "{285137B2-D9B9-4253-8B8C-4B399382480E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{0684CF23-F882-4283-925D-D858946D023F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BindingViewModels", "BindingViewModels", "{0684CF23-F882-4283-925D-D858946D023F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.ViewModels", "RestaurantManager.ViewModels\RestaurantManager.ViewModels.csproj", "{39AB6CF7-6380-409F-B3F6-C7CF1A6ADBDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.BindingViewModels", "RestaurantManager.ViewModels\RestaurantManager.BindingViewModels.csproj", "{39AB6CF7-6380-409F-B3F6-C7CF1A6ADBDC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{9CCA92FC-6D3E-4527-A819-34D1A6A54C18}"
 EndProject

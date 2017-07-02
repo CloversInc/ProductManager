@@ -1,8 +1,9 @@
-﻿using RestaurantManager.DataBase;
-
-namespace RestaurantManager.ViewModels
+﻿namespace RestaurantManager.BindingViewModels.ViewModels
 {
-    public class MenuItemViewModel
+    using DataBase;
+    using Mapper;
+
+    public class MenuItemViewModel : IMapFrom<MenuItem>
     {
         public int Id { get; set; }
 

@@ -27,6 +27,7 @@ namespace RestaurantManager.DataBase
     
         public virtual DbSet<MenuItem> MenuItems { get; set; }
         public virtual DbSet<MenuItemType> MenuItemTypes { get; set; }
+        public virtual DbSet<MenuType> MenuTypes { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<UnitType> UnitTypes { get; set; }

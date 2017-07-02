@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using RestaurantManager.Services.Implementations;
 using RestaurantManager.Services.Interfaces;
-using RestaurantManager.ViewModels;
 
 namespace RestaurantManager.WebApp.Controllers
 {

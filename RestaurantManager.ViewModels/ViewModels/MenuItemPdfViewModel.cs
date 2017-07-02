@@ -1,4 +1,4 @@
-﻿namespace RestaurantManager.ViewModels
+﻿namespace RestaurantManager.BindingViewModels.ViewModels
 {
     using System.Collections.Generic;
 
@@ -6,7 +6,7 @@
     {
         public MenuItemPdfViewModel()
         {
-            MenuItemViewModels = new SortedDictionary<int, ICollection<MenuItemViewModel>>();
+            this.MenuItemViewModels = new SortedDictionary<int, ICollection<MenuItemViewModel>>();
         }
 
         public SortedDictionary<int, ICollection<MenuItemViewModel>> MenuItemViewModels { get; set; }

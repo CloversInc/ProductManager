@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using RestaurantManager.Data;
-using RestaurantManager.DataBase;
-using RestaurantManager.Services.Interfaces;
-using RestaurantManager.ViewModels;
-
-namespace RestaurantManager.Services.Implementations
+﻿namespace RestaurantManager.Services.Implementations
 {
+    using System.Collections.Generic;
+    using AutoMapper;
+    using BindingViewModels.Mapper;
+    using BindingViewModels.ViewModels;
+    using Data;
+    using DataBase;
+    using Interfaces;
+
     public class MenuItemService : BaseService, IMenuItemService
     {
-        public MenuItemService(IRestaurantManagerData data)
-            : base(data)
+        public MenuItemService(IRestaurantManagerData data, IMappingService mappingService)
+            : base(data, mappingService)
         {
         }
 
@@ -35,11 +35,26 @@ namespace RestaurantManager.Services.Implementations
                     model.MenuItemViewModels.Add(menuItem.MenuItemType.OrderId, new List<MenuItemViewModel>());
                 }
 
-                MenuItemViewModel value = Mapper.Map<MenuItem, MenuItemViewModel>(menuItem);
+                MenuItemViewModel value = this.MappingService.Map<MenuItemViewModel>(menuItem);
                 model.MenuItemViewModels[menuItem.MenuItemTypeId].Add(value);
             }
 
             return model;
+        }
+
+        public MenuItemFullViewModel GetById(int id)
+        {
+            return this.MappingService.Map<MenuItemFullViewModel>(this.Data.MenuItems.GetById(id));
+        }
+
+        public IEnumerable<MenuItemTypeViewModel> MenuItemTypes()
+        {
+            return this.MappingService.Map<IEnumerable<MenuItemTypeViewModel>>(this.Data.MenuItemsTypes.GetAll());
+        }
+
+        public IEnumerable<UnitTypesViewModel> UnitItemTypes()
+        {
+            return this.MappingService.Map<IEnumerable<UnitTypesViewModel>>(this.Data.UnitTypes.GetAll());
         }
     }
 }
