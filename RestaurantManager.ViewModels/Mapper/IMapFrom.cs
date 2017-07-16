@@ -1,4 +1,4 @@
-﻿namespace RestaurantManager.BindingViewModels.Mapper
+﻿namespace RestaurantManager.ViewAndBindingModels.Mapper
 {
     public interface IMapFrom<T>
     {

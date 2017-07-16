@@ -1,4 +1,4 @@
-﻿namespace RestaurantManager.BindingViewModels.ViewModels
+﻿namespace RestaurantManager.ViewAndBindingModels.ViewModels
 {
     using DataBase;
     using Mapper;
@@ -14,5 +14,7 @@
         public string MenuItemTypeName { get; set; }
 
         public string UnitTypeName { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

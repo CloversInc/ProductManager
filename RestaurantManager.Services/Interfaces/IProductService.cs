@@ -1,7 +1,7 @@
 ﻿namespace RestaurantManager.Services.Interfaces
 {
     using System.Collections.Generic;
-    using BindingViewModels;
+    using ViewAndBindingModels;
 
     public interface IProductService
     {

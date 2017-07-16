@@ -2,14 +2,14 @@
 
 namespace RestaurantManager.WebApp.Controllers
 {
-    using BindingViewModels.ViewModels;
+    using ViewAndBindingModels.ViewModels;
     using Services.Interfaces;
 
     public class MenuItemController : Controller
     {
-        private IMenuItemService menuItemService;
+        private IMenuService menuItemService;
 
-        public MenuItemController(IMenuItemService menuItemService)
+        public MenuItemController(IMenuService menuItemService)
         {
             this.menuItemService = menuItemService;
         }

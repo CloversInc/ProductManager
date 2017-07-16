@@ -1,4 +1,4 @@
-﻿namespace RestaurantManager.BindingViewModels.ViewModels
+﻿namespace RestaurantManager.ViewAndBindingModels.ViewModels
 {
     public class MenuItemIndexViewModel
     {

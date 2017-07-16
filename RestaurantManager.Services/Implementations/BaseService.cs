@@ -1,6 +1,6 @@
 ﻿namespace RestaurantManager.Services.Implementations
 {
-    using BindingViewModels.Mapper;
+    using ViewAndBindingModels.Mapper;
     using Data;
     using Interfaces;
 

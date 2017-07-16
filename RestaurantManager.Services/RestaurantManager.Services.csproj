@@ -36,13 +36,13 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -65,9 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BaseService.cs" />
-    <Compile Include="Implementations\MenuItemService.cs" />
+    <Compile Include="Implementations\MenuService.cs" />
     <Compile Include="Implementations\ProductService.cs" />
-    <Compile Include="Interfaces\IMenuItemService.cs" />
+    <Compile Include="Interfaces\IMenuService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,14 +80,18 @@
       <Project>{EC146E05-4DF4-4576-B31C-BC4C0DD1FCD5}</Project>
       <Name>RestaurantManager.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RestaurantManager.ViewModels\RestaurantManager.BindingViewModels.csproj">
+    <ProjectReference Include="..\RestaurantManager.ViewModels\RestaurantManager.ViewAndBindingModels.csproj">
       <Project>{39AB6CF7-6380-409F-B3F6-C7CF1A6ADBDC}</Project>
-      <Name>RestaurantManager.BindingViewModels</Name>
+      <Name>RestaurantManager.ViewAndBindingModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="App_Browsers\qt.browser" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

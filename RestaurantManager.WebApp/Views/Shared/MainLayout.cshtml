@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Restaurant Dnes</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/dist/css/select2.min.css" rel="stylesheet" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @RenderSection("styles", required: false);
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Начало", "Index", "Home")</li>
                     <li>@Html.ActionLink("Обедно меню", "MenuLunch", "Menu")</li>
-                    <li>@Html.ActionLink("Артули", "Index", "MenuItem")</li>
+                    <li>@Html.ActionLink("Артикули", "Index", "MenuItem")</li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,29 @@
+﻿.pdf {
+    font-style: italic;
+    height: 750px;
+    margin: 0 auto;
+    padding: 25px 0 35px;
+}
+
+    .pdf h2 {
+        font-size: 28px;
+        margin-bottom: 60px;
+        font-weight: bold;
+    }
+
+    .pdf h4 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+.big {
+    height: 140px;
+}
+
+.small {
+    height: 80px;
+}
+
+.x-small {
+    height: 60px;
+}

@@ -1,4 +1,4 @@
-﻿namespace RestaurantManager.BindingViewModels
+﻿namespace RestaurantManager.ViewAndBindingModels
 {
     using DataBase;
     using Mapper;

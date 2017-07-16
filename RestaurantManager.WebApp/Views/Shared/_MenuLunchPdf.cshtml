@@ -1,0 +1,19 @@
+﻿@using RestaurantManager.ViewAndBindingModels.ViewModels
+
+@model MenuItemPdfViewModel
+
+<div class="row pdf">
+    <div class="col-xs-12">
+        <h2 class="text-center">
+            <img src="~/Content/Images/DnesIcon.png" />
+        </h2>
+        @foreach (var item in Model.MenuItemViewModels)
+        {
+            string menuItemTypeName = item.Value.FirstOrDefault().MenuItemTypeName;
+            <h4 class="text-center">@menuItemTypeName</h4>
+            <div id="@item.Key" class="row small">
+
+            </div>
+        }
+    </div>
+</div>

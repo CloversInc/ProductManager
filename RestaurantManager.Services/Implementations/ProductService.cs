@@ -1,8 +1,8 @@
 ﻿namespace RestaurantManager.Services.Implementations
 {
     using System.Collections.Generic;
-    using BindingViewModels;
-    using BindingViewModels.Mapper;
+    using ViewAndBindingModels;
+    using ViewAndBindingModels.Mapper;
     using Data;
     using DataBase;
     using Interfaces;

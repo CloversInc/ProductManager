@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F466F7B9-1AD5-423F-ABBE-48A7AED3F4DA}"
 EndProject
@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.Services", "RestaurantManager.Services\RestaurantManager.Services.csproj", "{285137B2-D9B9-4253-8B8C-4B399382480E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BindingViewModels", "BindingViewModels", "{0684CF23-F882-4283-925D-D858946D023F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewAndBindingModels", "ViewAndBindingModels", "{0684CF23-F882-4283-925D-D858946D023F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.BindingViewModels", "RestaurantManager.ViewModels\RestaurantManager.BindingViewModels.csproj", "{39AB6CF7-6380-409F-B3F6-C7CF1A6ADBDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManager.ViewAndBindingModels", "RestaurantManager.ViewModels\RestaurantManager.ViewAndBindingModels.csproj", "{39AB6CF7-6380-409F-B3F6-C7CF1A6ADBDC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{9CCA92FC-6D3E-4527-A819-34D1A6A54C18}"
 EndProject
