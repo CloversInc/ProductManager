@@ -1,5 +1,8 @@
 ﻿namespace RestaurantManager.Services.Implementations
 {
+
+    using Rotativa;
+    using Rotativa.Options;
     using System.Collections.Generic;
     using AutoMapper;
     using ViewAndBindingModels.Mapper;
@@ -7,8 +10,6 @@
     using Data;
     using DataBase;
     using Interfaces;
-    using Rotativa;
-    using Rotativa.Options;
 
     public class MenuService : BaseService, IMenuService
     {

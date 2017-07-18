@@ -1,4 +1,6 @@
-﻿namespace RestaurantManager.WebApp.Controllers
+﻿using System;
+
+namespace RestaurantManager.WebApp.Controllers
 {
     using System.Web.Mvc;
     using Services.Interfaces;
@@ -33,14 +35,16 @@
             var pdf = this.menuService.CreatePdf(model);
             var pdfByteArr = pdf.BuildPdf(this.ControllerContext);
 
-            //this.Response.ClearContent();
-            //this.Response.ContentType = "application/pdf";
-            //this.Response.AddHeader("Content-Disposition", "inline");
-            //this.Response.AddHeader("Content-Length", pdfByteArr.Length.ToString());
-            //this.Response.BinaryWrite(pdfByteArr);
-            //this.Response.End();
 
-            return this.File(pdfByteArr, "application/pdf");
+            this.Response.ClearContent();
+            this.Response.ContentType = "application/pdf";
+            this.Response.AddHeader("Content-Disposition", "inline; attachment; filename=Preview.pdf");
+            this.Response.AddHeader("Content-Length", pdfByteArr.Length.ToString());
+            this.Response.BinaryWrite(pdfByteArr);
+            this.Response.End();
+            var file = this.File(pdfByteArr, "application/pdf");
+
+            return file;
         }
     }
 }

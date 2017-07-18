@@ -32,7 +32,7 @@
     <div class="col-md-6">
         @Html.Partial("_MenuLunchPdf", Model);
     </div>
-
+    <embed />
 </div>
 @section scripts{
     <script>
@@ -46,30 +46,31 @@
                 }
             });
 
-            $('.select-menuItem').on('change', function () {
-                var $selectedOptions = $(this).find('option:selected');
-                var menuTypeId = $(this).attr('menu-type-id');
-                var $parent = $('div #' + menuTypeId);
-                data = [];
-                $parent.html('');
+            $('.select-menuItem').on('change',
+                function () {
+                    var $selectedOptions = $(this).find('option:selected');
+                    var menuTypeId = $(this).attr('menu-type-id');
+                    var $parent = $('div #' + menuTypeId);
+                    data = [];
+                    $parent.html('');
 
-                $selectedOptions.each(function (key, value) {
-                    var largeWidth = 8;
-                    var smallWidth = 2;
-                    var currency = 'лв';
-                    var itemId = $(value).val();
-                    var name = $(value).text().trim();
-                    var amount = $(value).attr('unit-type-amount');
-                    var unitType = $(value).attr('unit-type-name');
-                    var price = $(value).attr('price');
+                    $selectedOptions.each(function (key, value) {
+                        var largeWidth = 8;
+                        var smallWidth = 2;
+                        var currency = 'лв';
+                        var itemId = $(value).val();
+                        var name = $(value).text().trim();
+                        var amount = $(value).attr('unit-type-amount');
+                        var unitType = $(value).attr('unit-type-name');
+                        var price = $(value).attr('price');
 
-                    var $nameItem = createItem(name, itemId, largeWidth);
-                    var $amountItem = createItem(amount + unitType + '.', itemId, smallWidth);
-                    var $price = createItem(price + currency + '.', itemId, smallWidth);
+                        var $nameItem = createItem(name, itemId, largeWidth);
+                        var $amountItem = createItem(amount + unitType + '.', itemId, smallWidth);
+                        var $price = createItem(price + currency + '.', itemId, smallWidth);
 
-                    $parent.append($nameItem, $amountItem, $price);
+                        $parent.append($nameItem, $amountItem, $price);
+                    });
                 });
-            });
 
             function createItem(text, id, elementWidth) {
                 var menuItemString = '<div class="' + 'col-xs-' + elementWidth + '" ' + '>' + text + '</div>';
@@ -79,7 +80,6 @@
             }
 
             $(document).on('click', '#generate-pdf', function (e) {
-                alert();
                 e.stopPropagation();
                 var postData = [];
                 var $selectElements = $('select');
@@ -95,20 +95,29 @@
                         var amount = $(value).attr('unit-type-amount');
                         var unitType = $(value).attr('unit-type-name');
                         var price = $(value).attr('price');
-                        var model = { 'Id': itemId, 'Name': name, 'UnitTypeAmount': amount, 'UnitTypeName': unitType, 'Price': price };
+                        var model = {
+                            'Id': itemId,
+                            'Name': name,
+                            'UnitTypeAmount': amount,
+                            'UnitTypeName': unitType,
+                            'Price': price
+                        };
                         postValue.push(model);
                     });
 
                     postData.push({ 'key': menuTypeId, 'value': postValue });
                 });
 
-                $.ajax({
-                    url: '/Menu/GenerateMenuLunchPdf',
-                    dataType: 'json',
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(postData)
-                });
+                $.post('/Menu/GenerateMenuLunchPdf', JSON.stringify(postData))
+                    .success(function (data) {
+                        toastr.success('Файлът е създаден');
+                        $embed = $('embed');
+                        $embed.attr('src', '/Menu/GenerateMenuLunchPdf');
+                        $embed.attr('type', 'application/pdf');
+                    })
+                    .fail(function () {
+                        toastr.error('Файлът не беше създаден');
+                    });
             });
         });
     </script>

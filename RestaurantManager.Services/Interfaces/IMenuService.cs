@@ -1,4 +1,5 @@
-﻿namespace RestaurantManager.Services.Interfaces
+﻿
+namespace RestaurantManager.Services.Interfaces
 {
     using Rotativa;
     using System.Collections.Generic;
