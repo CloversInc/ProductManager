@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace RestaurantManager.WebApp.Controllers
 {
@@ -25,26 +26,17 @@ namespace RestaurantManager.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult GenerateMenuLunchPdf(SortedDictionary<int, ICollection<MenuItemViewModel>> models)
+        public string GenerateMenuLunchPdf(SortedDictionary<int, ICollection<MenuItemViewModel>> models)
         {
-             var model = new MenuItemPdfViewModel
+            var model = new MenuItemPdfViewModel
             {
                 MenuItemViewModels = models
             };
 
             var pdf = this.menuService.CreatePdf(model);
             var pdfByteArr = pdf.BuildPdf(this.ControllerContext);
-
-
-            this.Response.ClearContent();
-            this.Response.ContentType = "application/pdf";
-            this.Response.AddHeader("Content-Disposition", "inline; attachment; filename=Preview.pdf");
-            this.Response.AddHeader("Content-Length", pdfByteArr.Length.ToString());
-            this.Response.BinaryWrite(pdfByteArr);
-            this.Response.End();
-            var file = this.File(pdfByteArr, "application/pdf");
-
-            return file;
+            
+            return Convert.ToBase64String(pdfByteArr);
         }
     }
 }

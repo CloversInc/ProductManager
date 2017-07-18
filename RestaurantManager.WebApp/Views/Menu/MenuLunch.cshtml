@@ -30,31 +30,31 @@
 
     </div>
     <div class="col-md-6">
-        @Html.Partial("_MenuLunchPdf", Model);
+        @Html.Partial("_MenuLunchPdf", Model)
     </div>
-    <embed />
+    <embed/>
 </div>
 @section scripts{
     <script>
-        $(document).ready(function () {
-            var data;
+        $(document).ready(function() {
+            var postData;
             $('.select-menuItem').select2({
                 multiple: true,
                 width: '100%',
-                matcher: function (params, data) {
+                matcher: function(params, data) {
                     return matchStart(params, data)
                 }
             });
 
             $('.select-menuItem').on('change',
-                function () {
+                function() {
                     var $selectedOptions = $(this).find('option:selected');
                     var menuTypeId = $(this).attr('menu-type-id');
                     var $parent = $('div #' + menuTypeId);
                     data = [];
                     $parent.html('');
 
-                    $selectedOptions.each(function (key, value) {
+                    $selectedOptions.each(function(key, value) {
                         var largeWidth = 8;
                         var smallWidth = 2;
                         var currency = 'лв';
@@ -79,46 +79,52 @@
                 return $menuItem;
             }
 
-            $(document).on('click', '#generate-pdf', function (e) {
-                e.stopPropagation();
-                var postData = [];
-                var $selectElements = $('select');
+            $(document).on('click',
+                '#generate-pdf',
+                function(e) {
+                    e.stopPropagation();
+                    postData = [];
+                    var $selectElements = $('select');
 
-                $selectElements.each(function (selectKey, selectValue) {
-                    var menuTypeId = $(selectValue).attr('menu-type-id');
-                    var postValue = [];
-                    var $selectedOptions = $(selectValue).find('option:selected');
+                    $selectElements.each(function(selectKey, selectValue) {
+                        var menuTypeId = $(selectValue).attr('menu-type-id');
+                        var postValue = [];
+                        var $selectedOptions = $(selectValue).find('option:selected');
 
-                    $selectedOptions.each(function (key, value) {
-                        var itemId = $(value).val();
-                        var name = $(value).text().trim();
-                        var amount = $(value).attr('unit-type-amount');
-                        var unitType = $(value).attr('unit-type-name');
-                        var price = $(value).attr('price');
-                        var model = {
-                            'Id': itemId,
-                            'Name': name,
-                            'UnitTypeAmount': amount,
-                            'UnitTypeName': unitType,
-                            'Price': price
-                        };
-                        postValue.push(model);
+                        $selectedOptions.each(function(key, value) {
+                            var itemId = $(value).val();
+                            var name = $(value).text().trim();
+                            var amount = $(value).attr('unit-type-amount');
+                            var unitType = $(value).attr('unit-type-name');
+                            var price = $(value).attr('price');
+                            var model = {
+                                'Id': itemId,
+                                'Name': name,
+                                'UnitTypeAmount': amount,
+                                'UnitTypeName': unitType,
+                                'Price': price
+                            };
+                            postValue.push(model);
+                        });
+                        postData.push({ 'key': menuTypeId, 'value': postValue });
                     });
 
-                    postData.push({ 'key': menuTypeId, 'value': postValue });
+                    $.ajax({
+                        url: '/Menu/GenerateMenuLunchPdf',
+                        data: JSON.stringify(postData),
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            var pdfBase64 = "data:application/pdf;base64," + data;
+                            toastr.success('Файлът е създаден');
+                            var $embed = $('embed');
+                            $embed.attr('src', pdfBase64);
+                            $embed.attr('type', 'application/pdf');
+                            $embed.attr('style', 'width: 800px; height:800px;');
+                        },
+                        error: function () { toastr.error('Файлът не беше създаден'); }
+                    });
                 });
-
-                $.post('/Menu/GenerateMenuLunchPdf', JSON.stringify(postData))
-                    .success(function (data) {
-                        toastr.success('Файлът е създаден');
-                        $embed = $('embed');
-                        $embed.attr('src', '/Menu/GenerateMenuLunchPdf');
-                        $embed.attr('type', 'application/pdf');
-                    })
-                    .fail(function () {
-                        toastr.error('Файлът не беше създаден');
-                    });
-            });
         });
     </script>
 }
