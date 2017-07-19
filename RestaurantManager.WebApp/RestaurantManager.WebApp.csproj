@@ -181,6 +181,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dist\css\select2.min.css" />
@@ -189,6 +191,7 @@
     <Content Include="Content\dist\js\select2.js" />
     <Content Include="Content\dist\js\select2.min.js" />
     <Content Include="Content\Images\DnesIcon.png" />
+    <Content Include="Content\Images\home.png" />
     <Content Include="Content\menu-lunch-pdf.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -205,6 +208,7 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -214,6 +218,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2-override.js" />
@@ -235,8 +240,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Menu\MenuLunch.cshtml" />
     <Content Include="Views\MenuItem\Index.cshtml" />
-    <Content Include="Views\MenuItem\CrudActionView.cshtml" />
-    <Content Include="Views\Shared\_MenuLunchPdf.cshtml" />
+    <Content Include="Views\MenuItem\_CrudActionView.cshtml" />
+    <Content Include="Views\Menu\_MenuLunchPdf.cshtml" />
+    <Content Include="Views\Shared\PdfLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

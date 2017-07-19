@@ -1,0 +1,51 @@
+﻿@using RestaurantManager.ViewAndBindingModels.ViewModels
+
+@{ Layout = @"~/Views/Shared/PdfLayout.cshtml"; }
+
+@model MenuItemPdfViewModel
+<div class="row">
+    <div class="col-xs-6">
+        <div class="row pdf">
+            <div class="col-xs-12">
+                <h2 class="text-center">
+                    <img src="@Server.MapPath("~/Content/Images/DnesIcon.png")" />
+                </h2>
+                @foreach (var menuItemDict in Model.MenuItemViewModels)
+                {
+                    string menuItemTypeName = menuItemDict.Value.FirstOrDefault().MenuItemTypeName;
+                    <h4 class="text-center">@menuItemTypeName</h4>
+                    <div id="@menuItemDict.Key" class="row medium">
+                        @foreach (var menuItem in menuItemDict.Value)
+                        {
+                            <div class="col-xs-8">@menuItem.Name</div>
+                            <div class="col-xs-2">@menuItem.UnitTypeAmount @(menuItem.UnitTypeName + ".")</div>
+                            <div class="col-xs-2">@menuItem.Price лв.</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="row pdf">
+            <div class="col-xs-12">
+                <h2 class="text-center">
+                    <img src="@Server.MapPath("~/Content/Images/DnesIcon.png")" />
+                </h2>
+                @foreach (var menuItemDict in Model.MenuItemViewModels)
+                {
+                    string menuItemTypeName = menuItemDict.Value.FirstOrDefault().MenuItemTypeName;
+                    <h4 class="text-center">@menuItemTypeName</h4>
+                    <div id="@menuItemDict.Key" class="row medium">
+                        @foreach (var menuItem in menuItemDict.Value)
+                        {
+                            <div class="col-xs-8">@menuItem.Name</div>
+                            <div class="col-xs-2">@menuItem.UnitTypeAmount @(menuItem.UnitTypeName + ".")</div>
+                            <div class="col-xs-2">@menuItem.Price лв.</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

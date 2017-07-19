@@ -14,16 +14,24 @@
     .pdf h4 {
         font-size: 18px;
         font-weight: bold;
+        text-transform: uppercase;
     }
 
 .big {
     height: 140px;
 }
 
-.small {
+.medium {
     height: 80px;
 }
 
-.x-small {
+.small {
     height: 60px;
+}
+
+embed {
+    width: 800px;
+    height: 650px;
+    display: block;
+    margin: 0 auto;
 }

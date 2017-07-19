@@ -5,7 +5,7 @@
 }
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-offset-3">
         <h2 class="text-center">Обедно Меню</h2>
 
         @foreach (var item in Model.MenuItemViewModels)
@@ -16,6 +16,7 @@
                 @foreach (MenuItemViewModel menuItem in menuItems)
                 {
                     <option value="@menuItem.Id"
+                            item-type-name="@menuItem.MenuItemTypeName"
                             unit-type-name="@menuItem.UnitTypeName"
                             unit-type-amount="@menuItem.UnitTypeAmount"
                             price="@string.Format("{0:f2}", menuItem.Price)">
@@ -26,105 +27,118 @@
             </select>
         }
 
-        <button id="generate-pdf">Създай файл</button>
-
+        <button id="generate-pdf" type="button" class="btn btn-success btn-group-sm" data-toggle="modal" data-target="#pdf">
+            Създай файл
+        </button>
     </div>
-    <div class="col-md-6">
-        @Html.Partial("_MenuLunchPdf", Model)
+    <!-- Modal -->
+    <div class="modal fade" id="pdf" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <embed />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <embed/>
-</div>
-@section scripts{
-    <script>
-        $(document).ready(function() {
-            var postData;
-            $('.select-menuItem').select2({
-                multiple: true,
-                width: '100%',
-                matcher: function(params, data) {
-                    return matchStart(params, data)
-                }
-            });
-
-            $('.select-menuItem').on('change',
-                function() {
-                    var $selectedOptions = $(this).find('option:selected');
-                    var menuTypeId = $(this).attr('menu-type-id');
-                    var $parent = $('div #' + menuTypeId);
-                    data = [];
-                    $parent.html('');
-
-                    $selectedOptions.each(function(key, value) {
-                        var largeWidth = 8;
-                        var smallWidth = 2;
-                        var currency = 'лв';
-                        var itemId = $(value).val();
-                        var name = $(value).text().trim();
-                        var amount = $(value).attr('unit-type-amount');
-                        var unitType = $(value).attr('unit-type-name');
-                        var price = $(value).attr('price');
-
-                        var $nameItem = createItem(name, itemId, largeWidth);
-                        var $amountItem = createItem(amount + unitType + '.', itemId, smallWidth);
-                        var $price = createItem(price + currency + '.', itemId, smallWidth);
-
-                        $parent.append($nameItem, $amountItem, $price);
-                    });
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                var postData;
+                $('.select-menuItem').select2({
+                    multiple: true,
+                    width: '100%',
+                    matcher: function (params, data) {
+                        return matchStart(params, data)
+                    }
                 });
 
-            function createItem(text, id, elementWidth) {
-                var menuItemString = '<div class="' + 'col-xs-' + elementWidth + '" ' + '>' + text + '</div>';
-                var $menuItem = $(menuItemString).attr('menu-item-id', id);
+                $('.select-menuItem').on('change',
+                    function () {
+                        var $selectedOptions = $(this).find('option:selected');
+                        var menuTypeId = $(this).attr('menu-type-id');
+                        var $parent = $('div #' + menuTypeId);
+                        data = [];
+                        $parent.html('');
 
-                return $menuItem;
-            }
-
-            $(document).on('click',
-                '#generate-pdf',
-                function(e) {
-                    e.stopPropagation();
-                    postData = [];
-                    var $selectElements = $('select');
-
-                    $selectElements.each(function(selectKey, selectValue) {
-                        var menuTypeId = $(selectValue).attr('menu-type-id');
-                        var postValue = [];
-                        var $selectedOptions = $(selectValue).find('option:selected');
-
-                        $selectedOptions.each(function(key, value) {
+                        $selectedOptions.each(function (key, value) {
+                            var largeWidth = 8;
+                            var smallWidth = 2;
+                            var currency = 'лв';
                             var itemId = $(value).val();
                             var name = $(value).text().trim();
                             var amount = $(value).attr('unit-type-amount');
                             var unitType = $(value).attr('unit-type-name');
                             var price = $(value).attr('price');
-                            var model = {
-                                'Id': itemId,
-                                'Name': name,
-                                'UnitTypeAmount': amount,
-                                'UnitTypeName': unitType,
-                                'Price': price
-                            };
-                            postValue.push(model);
+
+                            var $nameItem = createItem(name, itemId, largeWidth);
+                            var $amountItem = createItem(amount + unitType + '.', itemId, smallWidth);
+                            var $price = createItem(price + currency + '.', itemId, smallWidth);
+
+                            $parent.append($nameItem, $amountItem, $price);
                         });
-                        postData.push({ 'key': menuTypeId, 'value': postValue });
                     });
 
-                    $.ajax({
-                        url: '/Menu/GenerateMenuLunchPdf',
-                        data: JSON.stringify(postData),
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            var pdfBase64 = "data:application/pdf;base64," + data;
-                            toastr.success('Файлът е създаден');
-                            var $embed = $('embed');
-                            $embed.attr('src', pdfBase64);
-                            $embed.attr('type', 'application/pdf');
-                            $embed.attr('style', 'width: 800px; height:800px;');
-                        },
-                        error: function () { toastr.error('Файлът не беше създаден'); }
+                function createItem(text, id, elementWidth) {
+                    var menuItemString = '<div class="' + 'col-xs-' + elementWidth + '" ' + '>' + text + '</div>';
+                    var $menuItem = $(menuItemString).attr('menu-item-id', id);
+
+                    return $menuItem;
+                }
+
+                $(document).on('click',
+                    '#generate-pdf',
+                    function (e) {
+                        e.stopPropagation();
+                        postData = [];
+                        var $selectElements = $('select');
+
+                        $selectElements.each(function (selectKey, selectValue) {
+                            var menuTypeId = $(selectValue).attr('menu-type-id');
+                            var postValue = [];
+                            var $selectedOptions = $(selectValue).find('option:selected');
+
+                            $selectedOptions.each(function (key, value) {
+                                var itemId = $(value).val();
+                                var name = $(value).text().trim();
+                                var itemTypeName = $(value).attr('item-type-name');
+                                var amount = $(value).attr('unit-type-amount');
+                                var unitType = $(value).attr('unit-type-name');
+                                var price = $(value).attr('price');
+                                var model = {
+                                    'Id': itemId,
+                                    'Name': name,
+                                    'MenuItemTypeName': itemTypeName,
+                                    'UnitTypeAmount': amount,
+                                    'UnitTypeName': unitType,
+                                    'Price': price
+                                };
+                                postValue.push(model);
+                            });
+                            postData.push({ 'key': menuTypeId, 'value': postValue });
+                        });
+
+                        $.ajax({
+                            url: '/Menu/GenerateMenuLunchPdf',
+                            data: JSON.stringify(postData),
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                var pdfBase64 = "data:application/pdf;base64," + data;
+                                toastr.success('Файлът е създаден');
+                                var $embed = $('embed');
+                                $embed.attr('src', pdfBase64);
+                                $embed.attr('type', 'application/pdf');
+                            },
+                            error: function () { toastr.error('Файлът не беше създаден'); }
+                        });
                     });
-                });
-        });
-    </script>
-}
+            });
+        </script>
+    }
