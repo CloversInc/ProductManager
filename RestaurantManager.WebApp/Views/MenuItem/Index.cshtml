@@ -19,8 +19,8 @@
             }
         </select>
     </div>
-    <div id="crud-panel">
-        @Html.Partial("_CrudActionView", Model.PostMenuItemModel);
+    <div class="col-md-6" id="crud-panel">
+        @Html.Partial("_CrudActionView", Model.PostMenuItemModel)
     </div>
 </div>
 
@@ -31,11 +31,11 @@
                 $(selectors).select2({
                     width: '100%',
                     tags: true,
-                    theme:"classic"
+                    theme: "classic"
                 });
 
                 $(selectors).on('select2:select', function (e) {
-                    $(selector +' select2-hidden-accessible').val(e.target.value);
+                    $(selectors + ' select2-hidden-accessible').val(e.target.value);
                 });
 
                 //$(selectors + ' select2-hidden-accessible').val().trigger('change');
@@ -52,12 +52,27 @@
             $('.single-select-menu-item').on('select2:select', function (e) {
                 $.ajax({
                     url: '@Url.Action("Details", "MenuItem")',
-                    data: { id: e.target.value}
-                }).done(function(data) {
+                    data: { id: e.target.value }
+                }).done(function (data) {
                     $('#crud-panel').html(data);
+                    $('#add-edit-button').text('Редактирай');
+                    $('#IsNew').val(false);
                     bindSelectors('.single-select-unit-type, .single-select-menu-item-type');
                 });
             });
+
+            $('form').on('keyup', function (ev) {
+                if (ev.keyCode == 13) {
+                    alert(123213);
+
+                    return false;
+                }
+            });
+
+            $('button').on('click', function () {
+                $('form').submit();
+            })
         });
+
     </script>
 }

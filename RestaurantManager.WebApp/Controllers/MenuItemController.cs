@@ -35,39 +35,25 @@ namespace RestaurantManager.WebApp.Controllers
             model.MenuItemTypesViewModel = this.menuItemService.MenuItemTypes();
             model.UnitTypesViewModel = this.menuItemService.UnitItemTypes();
 
-            return this.PartialView("CrudActionView", model);
+            return this.PartialView("_CrudActionView", model);
         }
 
-        // POST: MenuItem/Create
         [HttpPost]
-        public ActionResult CreateOrEdit(MenuItemFullViewModel model)
+        public ActionResult Create(MenuItemFullViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
-                return View("Index");
+                return this.View("CrudActionView", model);
             }
 
-            try
-            {
-                // TODO: Add insert logic here
+            // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View("Index");
-            }
+            return View("Index");
+
         }
 
-        // GET: MenuItem/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: MenuItem/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(MenuItemFullViewModel model)
         {
             try
             {
@@ -81,15 +67,8 @@ namespace RestaurantManager.WebApp.Controllers
             }
         }
 
-        // GET: MenuItem/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MenuItem/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(MenuItemFullViewModel model)
         {
             try
             {
