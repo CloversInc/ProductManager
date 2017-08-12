@@ -55,21 +55,29 @@
                     data: { id: e.target.value }
                 }).done(function (data) {
                     $('#crud-panel').html(data);
-                    $('#add-edit-button').text('Редактирай');
+                    $('#add-edit-button').text('Редактирай').val('Edit');
                     $('#IsNew').val(false);
                     bindSelectors('.single-select-unit-type, .single-select-menu-item-type');
                 });
             });
 
-            $('form').on('keyup', function (ev) {
-                if (ev.keyCode == 13) {
-                    alert(123213);
-
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
                     return false;
                 }
             });
 
+            $('form').submit(function (ev) {
+                ev.preventDefault();
+                alert();
+            });
+
             $('button').on('click', function () {
+                var formAction = '/MenuItem/' + $(this).val();
+
+                $('form').attr('action', formAction);
+                alert(formAction);
                 $('form').submit();
             })
         });
