@@ -1,10 +1,10 @@
 ﻿namespace RestaurantManager.Services.Interfaces
 {
     using System.Collections.Generic;
-    using BindingViewModels;
+    using DataLayer.Models;
 
     public interface IProductService
     {
-        IEnumerable<ProductViewModel> GetAll();
+        IEnumerable<Product> GetAll();
     }
 }

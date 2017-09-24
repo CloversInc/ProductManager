@@ -1,0 +1,67 @@
+﻿@model MenuItemIndexViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center">Артикули</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <select class="single-select-menu-item">
+            <option></option>
+            @foreach (var item in Model.ItemPdfViewModel.MenuItemViewModels)
+            {
+                ICollection<MenuItemViewModel> menuItems = item.Value;
+                <optgroup label="@menuItems.FirstOrDefault().MenuItemTypeName">
+                    @foreach (MenuItemViewModel menuItem in menuItems)
+                    {
+                        <option value="@menuItem.Id" id="@menuItem.Id">@menuItem.Name</option>
+                    }
+                </optgroup>
+            }
+        </select>
+    </div>
+    <div id="crud-panel">
+        @Html.Partial("CrudActionView", Model.PostMenuItemModel);
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            function bindSelectors(selectors) {
+                $(selectors).select2({
+                    width: '100%',
+                    tags: true,
+                    theme:"classic"
+                });
+
+                $(selectors).on('select2:select', function (e) {
+                    $(selector +' select2-hidden-accessible').val(e.target.value);
+                });
+
+                //$(selectors + ' select2-hidden-accessible').val().trigger('change');
+            }
+
+            bindSelectors('.single-select-unit-type, .single-select-menu-item-type');
+
+            $('.single-select-menu-item').select2({
+                width: '100%',
+                theme: "classic",
+                placeholder: 'Избери артикул'
+            });
+
+            $('.single-select-menu-item').on('select2:select', function (e) {
+                $.ajax({
+                    url: '@Url.Action("Details", "MenuItem")',
+                    data: { id: e.target.value}
+                }).done(function(data) {
+                    $('#crud-panel').html(data);
+                    bindSelectors('.single-select-unit-type, .single-select-menu-item-type');
+                });
+            });
+        });
+    </script>
+}

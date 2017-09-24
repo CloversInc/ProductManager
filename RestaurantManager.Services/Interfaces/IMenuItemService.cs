@@ -1,14 +1,14 @@
 ﻿namespace RestaurantManager.Services.Interfaces
 {
     using System.Collections.Generic;
-    using BindingViewModels.ViewModels;
-
+    using RestaurantManager.DataLayer.Models;
+    
     public interface IMenuItemService
     {
-        IEnumerable<MenuItemViewModel> GetAll();
-        MenuItemPdfViewModel GetPdfViewModel();
-        MenuItemFullViewModel GetById(int id);
-        IEnumerable<MenuItemTypeViewModel> MenuItemTypes();
-        IEnumerable<UnitTypesViewModel> UnitItemTypes();
+        IEnumerable<MenuItem> GetAll();
+        MenuItem GetPdfViewModel();
+        MenuItem GetById(int id);
+        IEnumerable<MenuItemType> MenuItemTypes();
+        IEnumerable<UnitType> UnitItemTypes();
     }
 }

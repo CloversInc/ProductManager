@@ -1,0 +1,20 @@
+﻿@model System.Collections.Generic.IEnumerable<RestaurantManager.Web.Models.ProductViewModel>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<ul>
+@foreach ( var product in Model)
+{
+    <li><ul>
+        <li>ID: @product.Id</li>
+        <li>Price: @product.Price</li>
+        <li>Name: @product.Name</li>
+        <li>Desc: @product.Description</li>
+    </ul></li>
+}
+</ul>
